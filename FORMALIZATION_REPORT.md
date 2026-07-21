@@ -183,6 +183,16 @@ The extracted PDF has SHA-256
 identifies `pdfTeX-1.40.29` as producer, and was committed unchanged after all
 four pages were rendered and visually inspected.
 
+After a current-branch display-name redaction, PDF workflow run
+`29853681380` succeeded in 1m 43s at commit
+`8fe77a1bf693b830e977a94a31945c71d50d5485`. Artifact `8504430357` had
+ZIP SHA-256
+`e64c94435646bf3ba4e18c87b5477a0e3351b2f906f50bfd16556001ffbede0c`.
+The extracted four-page PDF has SHA-256
+`9513a6b40dcca52bdf69bb4c2f19fb141b2d5a59f19fda18aae2395a237255f3`,
+identifies `pdfTeX-1.40.29` as producer, and its revised title page was
+rendered and visually inspected before the current PDF was replaced.
+
 An external `nanoda` check was also attempted with `nanoda-allow-sorry:
 false` in workflow run `29841907020`. The ordinary `lake build` succeeded
 (`2,721` jobs), `lean4export` detected and exported module `A211420`, and
@@ -222,8 +232,8 @@ Final artifact SHA-256 digests:
 - `A211420.lean`: `96a2f752cd8f0331a6b5cf8d3a431df4a00f5e905b212691e408028f5937b186`
 - `scripts/verify.sh`: `5436609f463658ac1ec6352ea1c98ab151f14eb77af78667491ea52f5396182a`
 - `lake-manifest.json`: `768165e9bf27433856a5be4dbbf46e3037c0da71001979aa0fdc6aa269ac6fe7`
-- `paper/a211420_formalized.tex`: `8f02a7eda9c8af6d07628292eb505b919c1a6038aeedc60cf0410343c5052328`
-- `paper/a211420_formalized.pdf`: `90103b8ae0d0808192672bbbdb50e20dd2e0a2fa342c97f2a2bf7df3dbe2137e`
+- `paper/a211420_formalized.tex`: `4aef7a0cc047e6f2e108d92bd9e2bcc65c572392cb7fff95b77ecbf2fbfffd73`
+- `paper/a211420_formalized.pdf`: `9513a6b40dcca52bdf69bb4c2f19fb141b2d5a59f19fda18aae2395a237255f3`
 - `independent/aristotle/Main.lean`: `e89ef8dd6b3cec62dfabdcb0bc45c674679875c9e0ca6e5495281c90e7f60313`
 - Aristotle source archive: `77f332335d74a233ed1f231e8ca26f303d7adcc39f73d5edea0d83b7e9875d38`
 
@@ -251,10 +261,11 @@ ledger, including failed intermediate builds.
 ## TeX/PDF status
 
 `paper/a211420_formalized.pdf` is the artifact produced from the committed
-TeX by TeX Live 2026 on Debian in GitHub Actions run `29849862149`. Its
+TeX by TeX Live 2026 on Debian in GitHub Actions run `29853681380`. Its
 producer is `pdfTeX-1.40.29`, its page count is four, and all four rendered
-pages were visually inspected for clipping, overlap, malformed formulae, and
-unresolved references before the file was committed. The workflow deletes
+pages retain the previously inspected mathematical content; the revised title
+page was visually re-inspected after the current-branch display-name
+redaction. The workflow deletes
 the pre-existing committed PDF before compilation and uploads the newly built
 file, preventing a stale binary from passing as a successful TeX build.
 

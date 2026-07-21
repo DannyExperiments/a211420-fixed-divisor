@@ -195,3 +195,22 @@ the earlier ReportLab file byte-for-byte.
 
 The following evidence-only commit records those run identifiers. It does not
 alter the Lean source, TeX source, proof PDF, workflows, or pinned toolchain.
+
+## Current-branch display-name redaction
+
+| Command/action | Exit/status |
+|---|---:|
+| current-file name scan before editing | 0; three current text occurrences identified |
+| public-history audit in a fresh mirror clone | 0; historical occurrences identified and deliberately left intact under the selected non-destructive scope |
+| replace the current README, disclosure, and TeX attribution with the first name only | 0 |
+| current-file name scan after editing | 1 from `rg`, meaning no current text matches |
+| edit the GitHub `v1.0.0` release description | completed; release page contains no match |
+| PDF workflow run `29853681380` | 0; success in 1m 43s at commit `8fe77a1bf693b830e977a94a31945c71d50d5485` |
+| downloaded artifact `8504430357` and checked ZIP SHA-256 | 0; `e64c94435646bf3ba4e18c87b5477a0e3351b2f906f50bfd16556001ffbede0c`, matching GitHub's digest |
+| extracted PDF SHA-256 and `pdfinfo` | 0; `9513a6b40dcca52bdf69bb4c2f19fb141b2d5a59f19fda18aae2395a237255f3`, producer `pdfTeX-1.40.29`, four pages |
+| render and visually inspect the revised title page | 0; first-name-only attribution is present and the layout is clean |
+| final `./scripts/verify.sh` after the redaction and PDF replacement | 0; 2,721-job primary build, separate Aristotle compile, and source-integrity gate passed |
+
+The existing public commit history and `v1.0.0` tag were not rewritten, as
+explicitly selected. This preserves the published verification record while
+removing the family name from current `main` files and the release description.
