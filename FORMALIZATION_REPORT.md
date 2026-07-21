@@ -194,6 +194,29 @@ verification and not as a failure of the Lean proof.
 The exact public signatures and axiom dependencies were also checked with a
 temporary import-only audit file; that file was removed after the check.
 
+### Final publication-repair CI evidence
+
+The artifact-bearing publication-repair commit is
+`fadfe86329237b644ba8cfe94acdcbad69c12dc9`. This is the last repair commit
+that changes the proof PDF, workflow, checksums, command ledger, or this
+report before CI evidence was recorded. Both required workflows were manually
+dispatched on that exact commit and completed successfully:
+
+- Lean verification run
+  [`29850516799`](https://github.com/DannyExperiments/a211420-fixed-divisor/actions/runs/29850516799):
+  `workflow_dispatch`, success, total duration 5m 6s; primary build, bundled
+  Lean kernel replay, separate Aristotle compile, and forbidden-source gate.
+- PDF build run
+  [`29850538347`](https://github.com/DannyExperiments/a211420-fixed-divisor/actions/runs/29850538347):
+  `workflow_dispatch`, success, total duration 2m 36s. Artifact
+  `8503209554` has ZIP SHA-256
+  `57b3d812f7b1149a9be48490ab0bb0258f7cd406f0523af6d08b617295fb25ec`.
+
+The subsequent commit that adds these run identifiers is evidence-only; it
+does not change the Lean source, TeX source, committed PDF, workflows, or
+pinned environment. A commit cannot contain its own SHA, so the report names
+the exact artifact-bearing repair commit on which the recorded runs executed.
+
 Final artifact SHA-256 digests:
 
 - `A211420.lean`: `96a2f752cd8f0331a6b5cf8d3a431df4a00f5e905b212691e408028f5937b186`

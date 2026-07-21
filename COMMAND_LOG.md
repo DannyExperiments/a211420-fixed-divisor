@@ -181,3 +181,17 @@ LaTeX and to compile in the root file's directory. No TeX artifact is accepted
 for publication until its producer metadata and rendered pages are checked.
 The run `29849862149` satisfied those checks, and its extracted PDF replaced
 the earlier ReportLab file byte-for-byte.
+
+## Final repair-commit CI
+
+| Command/action | Exit/status |
+|---|---:|
+| create and push artifact-bearing publication-repair commit | 0; `fadfe86329237b644ba8cfe94acdcbad69c12dc9` |
+| manually dispatch Lean verification on `fadfe863...` | completed; workflow run `29850516799` |
+| manually dispatch PDF build on `fadfe863...` | completed; workflow run `29850538347` |
+| inspect Lean run `29850516799` | success; `workflow_dispatch`, exact commit `fadfe863...`, 5m 6s total |
+| inspect PDF run `29850538347` | success; `workflow_dispatch`, exact commit `fadfe863...`, 2m 36s total |
+| fetch final PDF artifact metadata | 0; artifact `8503209554`, ZIP SHA-256 `57b3d812f7b1149a9be48490ab0bb0258f7cd406f0523af6d08b617295fb25ec` |
+
+The following evidence-only commit records those run identifiers. It does not
+alter the Lean source, TeX source, proof PDF, workflows, or pinned toolchain.
