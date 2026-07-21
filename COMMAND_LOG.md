@@ -112,8 +112,14 @@ task response.
 | first minimal-import build using the nonexistent `Mathlib.Tactic.Omega` module | 1; corrected to Lean's actual `Lean.Elab.Tactic.Omega` module |
 | `/Users/danielcabezas/.elan/bin/lake build A211420` with exact theorem/tactic imports | 0; 2,721 jobs |
 | final `./scripts/verify.sh` with exact imports | 0; 2,721 jobs and source-integrity gate passed |
+| Ruby YAML parse of the revised `leanchecker` workflow | 0 |
+| `./scripts/verify.sh` after replacing the incompatible `nanoda` gate with bundled `leanchecker` | 0; 2,721 jobs and source-integrity gate passed |
+| SHA-256 queries for the revised README, report, and Lean workflow | 0 |
 
 GitHub repository creation, file uploads, commits, and workflow inspection were
 performed through authenticated GitHub and browser APIs rather than shell
-commands. Their commit and workflow identifiers are recorded in the final
-task response and the repository history.
+commands. PDF workflow run `29839378058` succeeded. Lean workflow run
+`29841907020` built all 2,721 jobs successfully but failed when `nanoda` 0.3.2
+reported `invalid digit found in string` while parsing the Lean 4.30 export;
+this compatibility result is recorded in `FORMALIZATION_REPORT.md`. Their
+commit and workflow identifiers are also preserved in the repository history.

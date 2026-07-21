@@ -29,12 +29,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build and independently check Lean declarations
+      - name: Build and replay Lean declarations through the kernel
         uses: leanprover/lean-action@v1
         with:
           build: true
-          nanoda: true
-          nanoda-allow-sorry: false
+          leanchecker: true
           use-mathlib-cache: true
       - name: Reject forbidden project proof escapes
         run: ./scripts/verify.sh

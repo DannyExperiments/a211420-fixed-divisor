@@ -45,7 +45,8 @@ The project pins Lean 4.30.0 and mathlib v4.30.0.
 ```
 
 The verification script runs `lake build` and rejects `sorry`, `admit`, new
-project axioms, and unsafe declarations in project Lean files.
+project axioms, and unsafe declarations in project Lean files. GitHub CI also
+replays the compiled module through Lean 4.30's bundled `leanchecker`.
 
 The principal declarations are:
 

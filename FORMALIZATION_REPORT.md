@@ -112,6 +112,19 @@ Final status: exit `0`. It runs `lake build` and rejects the forbidden proof
 tokens/declarations in project `*.lean` files while excluding `.lake/` and
 `.git/`.
 
+GitHub Actions additionally runs the official `leanprover/lean-action@v1`
+with `leanchecker: true`. On Lean 4.30 this invokes the bundled `leanchecker`
+to replay the compiled module through the Lean kernel, guarding against an
+invalid environment assembled by metaprogramming.
+
+An external `nanoda` check was also attempted with `nanoda-allow-sorry:
+false` in workflow run `29841907020`. The ordinary `lake build` succeeded
+(`2,721` jobs), `lean4export` detected and exported module `A211420`, and
+then `nanoda` 0.3.2 stopped before type-checking with `Error: invalid digit
+found in string` while parsing Lean 4.30's export. This is recorded as a
+checker/toolchain compatibility failure, not as successful independent
+verification and not as a failure of the Lean proof.
+
 The exact public signatures and axiom dependencies were also checked with a
 temporary import-only audit file; that file was removed after the check.
 
