@@ -3,8 +3,22 @@ name: Lean verification
 on:
   push:
     branches: [main]
+    paths:
+      - "*.lean"
+      - "**/*.lean"
+      - "lean-toolchain"
+      - "lake-manifest.json"
+      - "scripts/verify.sh"
+      - ".github/workflows/lean.yml"
   pull_request:
     branches: [main]
+    paths:
+      - "*.lean"
+      - "**/*.lean"
+      - "lean-toolchain"
+      - "lake-manifest.json"
+      - "scripts/verify.sh"
+      - ".github/workflows/lean.yml"
   workflow_dispatch:
 
 permissions:

@@ -24,7 +24,7 @@ only after factorial-ratio exactness has been proved.
 - mathlib tag: `v4.30.0`
 - mathlib commit: `c5ea00351c28e24afc9f0f84379aa41082b1188f`
 - `lake-manifest.json` SHA-256 at dependency resolution:
-  `bb4d3d21bb71044b40bc54d4101eeabe0894ca60d9a2acb1107bd10d06bf3073`
+  `768165e9bf27433856a5be4dbbf46e3037c0da71001979aa0fdc6aa269ac6fe7`
 
 The toolchain is pinned by `lean-toolchain`; mathlib is pinned by
 `lakefile.lean` and resolved in `lake-manifest.json`.
@@ -117,9 +117,11 @@ temporary import-only audit file; that file was removed after the check.
 
 Final artifact SHA-256 digests:
 
-- `A211420.lean`: `2630d746196a362d5d7cc438e8ba9556f716ece9ba61814c33a94df1a51bef9d`
+- `A211420.lean`: `96a2f752cd8f0331a6b5cf8d3a431df4a00f5e905b212691e408028f5937b186`
 - `scripts/verify.sh`: `61158423f2e685dcbff86a3846aebce0be3ebd1c07d6468f58a63008fbd608df`
-- `paper/a211420_formalized.tex`: `a7812024041fc7dbd32157ad34fb896a1d3af0fbd058ece10a905c27cfe6936f`
+- `lake-manifest.json`: `768165e9bf27433856a5be4dbbf46e3037c0da71001979aa0fdc6aa269ac6fe7`
+- `paper/a211420_formalized.tex`: `859efe84ee5c55655941ae432754224b1bc88fa2ea7cafbb93e290364e825f1c`
+- `paper/a211420_formalized.pdf`: `1e028e7893dd0f044eb294843067a39c1e3adf6a2b88883a6b76ea3d631a1b1c`
 
 See `COMMAND_LOG.md` for the chronological shell-command and exit-status
 ledger, including failed intermediate builds.
@@ -131,18 +133,19 @@ ledger, including failed intermediate builds.
 - `lakefile.lean` — mathlib v4.30.0 pin and library target.
 - `lake-manifest.json` — resolved dependency commits.
 - `scripts/verify.sh` — build and source-integrity gate.
-- `starter/A211420Target.lean` — placeholder-free compatibility import.
 - `paper/a211420_formalized.tex` — verified note.
+- `paper/a211420_formalized.pdf` — five-page readable proof artifact.
 - `FORMALIZATION_REPORT.md` — this report.
 - `COMMAND_LOG.md` — command ledger.
 - `.gitignore` — build and TeX artifacts.
 
 ## TeX/PDF status
 
-`paper/a211420_formalized.tex` is present. No `latexmk`, `pdflatex`,
-`xelatex`, `lualatex`, or `tectonic` executable was available, so no PDF was
-compiled. No TeX engine was installed because that would expand the approved
-tooling scope and is not required when an engine is absent.
+`paper/a211420_formalized.pdf` is present and was visually inspected page by
+page. No local TeX engine was available. The repository's GitHub Actions PDF
+workflow compiled `paper/a211420_formalized.tex` successfully with TeX Live
+2026 on Debian (workflow run `29839378058`, exit success), providing an
+independent check that the TeX source builds cleanly.
 
 ## Remaining unformalized extensions
 
