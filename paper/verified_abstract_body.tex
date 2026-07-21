@@ -1,0 +1,20 @@
+Let
+\[
+a_n=\frac{(8n)!\,n!}{(4n)!(3n)!(2n)!},
+\qquad
+L_r=\operatorname{lcm}(1,2,\ldots,8r-1).
+\]
+Peter Bala recorded in OEIS A211420 the conjecture that, for each
+\(r\geq1\) and \(k\in\{1,2,3\}\), there is a positive integer
+\(C(k,r)\), independent of \(n\), such that
+\[
+\prod_{i=1}^{r}(kn+i)\mid C(k,r)a_n
+\]
+for every \(n\geq0\). We prove the explicit uniform choice
+\[
+C(k,r)=L_r^r.
+\]
+The bound is not claimed to be sharp. The weaker existence assertion follows
+from classical multivariate Landau theory; the contribution here is the
+explicit \(L_r^r\) bound, a direct prime-power proof, and a complete Lean
+4/mathlib formalization checked by Lean's kernel.

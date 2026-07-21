@@ -248,8 +248,18 @@ ledger, including failed intermediate builds.
 - `lake-manifest.json` — resolved dependency commits.
 - `scripts/verify.sh` — build and source-integrity gate.
 - `paper/a211420_formalized.tex` — verified note.
+- `paper/verified_abstract_body.tex` — shared, theorem-scoped abstract source.
 - `paper/a211420_formalized.pdf` — four-page TeX-generated readable proof
-  artifact.
+  artifact with the verified abstract.
+- `social/a211420_announcement.tex` — 16:9 TeX announcement source importing
+  the shared abstract.
+- `social/a211420_announcement.pdf` and
+  `social/a211420_announcement_1600x900.png` — TeX-built announcement assets.
+- `social/ALT_TEXT.md` and `social/README.md` — accessible description and
+  rebuild instructions.
+- `scripts/build_presentation_assets.sh` — paper/social build and exact PNG
+  dimension gate.
+- `.github/workflows/presentation.yml` — reproducible presentation build.
 - `independent/aristotle/` — separate second machine-generated Lean proof,
   `PROVENANCE.md`, and exact upstream project archive.
 - `audits/fresh_pro_audit_3.txt` and `fresh_pro_audit_4.txt` — two later
@@ -260,14 +270,47 @@ ledger, including failed intermediate builds.
 
 ## TeX/PDF status
 
-`paper/a211420_formalized.pdf` is the artifact produced from the committed
-TeX by TeX Live 2026 on Debian in GitHub Actions run `29853681380`. Its
-producer is `pdfTeX-1.40.29`, its page count is four, and all four rendered
-pages retain the previously inspected mathematical content; the revised title
-page was visually re-inspected after the current-branch display-name
-redaction. The workflow deletes
-the pre-existing committed PDF before compilation and uploads the newly built
-file, preventing a stale binary from passing as a successful TeX build.
+`paper/a211420_formalized.pdf` is the artifact produced from the committed TeX
+by the presentation workflow on Debian in GitHub Actions run
+[`29857951928`](https://github.com/DannyExperiments/a211420-fixed-divisor/actions/runs/29857951928).
+Its producer is `pdfTeX-1.40.25`, its page count is four, and all four pages
+were rendered and visually inspected. The page renders were pixel-identical
+to the first successful presentation-workflow build, which already included
+the new abstract; there was no clipping, overlap, malformed equation, missing
+reference, or bad page break.
+
+## Presentation/documentation revision
+
+This revision does not change `A211420.lean`, either Lean theorem signature,
+the pinned Lean/mathlib environment, or the separate Aristotle source. The
+primary Lean file remains SHA-256
+`96a2f752cd8f0331a6b5cf8d3a431df4a00f5e905b212691e408028f5937b186`.
+
+The proof paper and announcement card both import
+`paper/verified_abstract_body.tex`, so the advertised theorem has one source
+of truth. The shared abstract states only the proved `L_r^r` divisibility and
+its existing contribution boundary. The announcement card adds the required
+non-sharpness, historical-priority, and human-review disclaimers; it advertises
+no extension outside `A211420.lean`.
+
+Presentation workflow run `29857951928` passed every step: dependency setup,
+paper build, social-card build, PNG signature/dimension verification, and
+artifact upload. Artifact `8506082004` had ZIP SHA-256
+`2e2299aca4932fbd946d9be54f72bcf34e18d4219b292c44a6422c6247f1a8e6`.
+The installed artifacts are:
+
+- paper PDF SHA-256:
+  `ce540961d91b5abc4f1cf08b67daf1418ad0a68722ab93fcf67a0c9d196069e4`;
+- announcement PDF SHA-256:
+  `e88c1b4b8f79b23de8a6d7f15989b76935685e65fd6154037d780613fd28d786`;
+- 1600 by 900 PNG SHA-256:
+  `2793be3319e7a6bd4e1e8c0e7dc418bf0f72ecabf556f40f0cdc8f93e40cf47a`.
+
+The local host had Poppler but no `latexmk` or `pdflatex`; the build script
+therefore exited 127 with its explicit missing-dependency message. The exact
+same script completed successfully in the recorded GitHub workflow, and its
+outputs were downloaded, hash-checked, installed, and visually inspected
+locally.
 
 ## Remaining unformalized extensions
 

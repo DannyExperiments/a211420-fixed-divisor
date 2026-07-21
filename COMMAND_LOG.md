@@ -214,3 +214,45 @@ alter the Lean source, TeX source, proof PDF, workflows, or pinned toolchain.
 The existing public commit history and `v1.0.0` tag were not rewritten, as
 explicitly selected. This preserves the published verification record while
 removing the family name from current `main` files and the release description.
+
+## Verified abstract and social-card revision
+
+| Command/action | Exit/status |
+|---|---:|
+| reconnect the detached local workspace to the public `origin` and fetch `main` | 0 |
+| compare the existing untracked project files with `origin/main` before attaching the worktree | 1 from `diff`; only known local handoff/research extras were additional, with no shared-file content difference |
+| `git reset --mixed origin/main` and `git switch -c add-verified-abstract-social-card` | 0 |
+| `shasum -a 256 A211420.lean` before editing | 0; `96a2f752...b186` |
+| inspect the paper, README, verifier, workflows, report, command log, checksums, and ignore rules | 0 |
+| add the shared verified abstract, paper inclusion, social-card source, alt text, social README, presentation script/workflow, and README graphic section through the patch interface | completed |
+| `sh -n scripts/build_presentation_assets.sh` | 0 |
+| Ruby YAML parse of `.github/workflows/presentation.yml` | 0 |
+| `git diff --check` before the provisional build commit | 0 |
+| first local `./scripts/build_presentation_assets.sh` | 127; explicit `Missing required dependency: latexmk` on the local host |
+| `./scripts/verify.sh` after the source/documentation edits | 0; 2,721-job primary build, separate Aristotle compile, and source-integrity gate passed |
+| staged-scope inspection and `git diff --cached --check` | 0; only the nine intended source/documentation files were staged |
+| create the provisional local CI-build commit | 0; its automatically inferred workstation identity was detected before push and replaced with the privacy-safe `Danny` plus GitHub noreply identity |
+| shell `git push` attempt | 128; HTTPS username credentials were unavailable, so subsequent branch commits used the authenticated GitHub connector |
+| create remote branch `add-verified-abstract-social-card` from current `main` and publish the provisional source tree through the GitHub connector | completed; commit `b53d5655ae7d17748a418d29c2bb01db8a626e5d` |
+| presentation workflow run `29857746786` | 0; first complete TeX build and exact 1600 by 900 dimension check succeeded |
+| download artifact `8506001196`, verify its ZIP digest, inspect `pdfinfo`, PNG IHDR, and render all four paper pages plus the card | 0; ZIP SHA-256 `9daccb...31a2`; no layout defect found, but card body typography was judged too small for feed use |
+| increase only announcement typography through the patch interface | completed; shared abstract text unchanged |
+| publish typography adjustment through the GitHub connector | completed; commit `8f2629cf50db2c5514b1a8da32c4386105382cd7` |
+| presentation workflow run `29857951928` | 0; all build, dimension-gate, and upload steps succeeded |
+| download artifact `8506082004` and verify ZIP SHA-256 | 0; `2e2299aca4932fbd946d9be54f72bcf34e18d4219b292c44a6422c6247f1a8e6` |
+| inspect the revised 1600 by 900 PNG at original resolution | 0; readable abstract and URL, centered equations, balanced whitespace, subtle badge, and no clipping |
+| install the workflow-built paper PDF, announcement PDF, and PNG | 0 |
+| `pdfinfo` on both installed PDFs and IHDR/file inspection of the installed PNG | 0; `pdfTeX-1.40.25`, four-page paper, one-page 16:9 card, and exact 1600 by 900 RGB PNG |
+| render every installed paper page and compare against the previously inspected render | 0; all four page images matched byte-for-byte |
+
+| final `git diff --check`, shell syntax check, and Ruby YAML parse | 0 |
+| final `shasum -a 256 A211420.lean` | 0; unchanged at `96a2f752...b186` |
+| final `./scripts/verify.sh` after all document and binary artifact changes | 0; 2,721-job primary build, separate Aristotle compile, and source-integrity gate passed |
+| privacy/credential scan of all intended text and binary artifacts | 0 overall; text `rg` returned 1 meaning no match, and PDF/PNG string scans found no workstation path, Codex path, private-key header, token prefix, family name, or workstation identity |
+| `git diff origin/main -- A211420.lean independent/aristotle/Main.lean lean-toolchain lakefile.lean lake-manifest.json` | 0 with empty output; protected theorem sources and pins unchanged |
+| `shasum -a 256 -c CHECKSUMS.sha256` after the final artifact set | 0; every listed source, report, workflow, PDF, PNG, and provenance artifact matched |
+| final PNG IHDR signature and dimension check | 0; valid PNG, width `0x00000640` (1600), height `0x00000384` (900) |
+
+The final branch/PR workflow evidence is recorded in the pull-request
+description and completion response because a commit cannot contain the run
+identifiers of workflows triggered by that same commit.

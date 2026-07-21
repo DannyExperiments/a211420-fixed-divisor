@@ -10,3 +10,8 @@
 /paper/*.fls
 /paper/*.log
 /paper/*.out
+/social/*.aux
+/social/*.fdb_latexmk
+/social/*.fls
+/social/*.log
+/social/*.out
