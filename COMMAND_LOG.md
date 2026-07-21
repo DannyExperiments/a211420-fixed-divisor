@@ -214,3 +214,33 @@ alter the Lean source, TeX source, proof PDF, workflows, or pinned toolchain.
 The existing public commit history and `v1.0.0` tag were not rewritten, as
 explicitly selected. This preserves the published verification record while
 removing the family name from current `main` files and the release description.
+
+## `amsart` paper rewrite
+
+| Command/action | Exit/status |
+|---|---:|
+| refresh `origin/main`, verify local `main` is identical, and create `rewrite-paper-amsart` | 0 |
+| record pre-edit SHA-256 values and `pdfinfo` | 0; Lean `96a2f752...b186`, old TeX `4aef7a0c...8da`, old PDF `9513a6b4...f3`, four US-letter pages |
+| rewrite `paper/a211420_formalized.tex` as a three-section A4 `amsart` paper | completed through the patch interface |
+| `git diff --check` and protected-source diff | 0; protected diff empty |
+| first post-rewrite `./scripts/verify.sh` | 0; 2,721-job primary build, separate Aristotle compile, and forbidden-source gate passed |
+| `gh --version` | 127; GitHub CLI absent, so authenticated connector operations were used |
+| shell `git push -u origin rewrite-paper-amsart` | 128; no shell HTTPS credentials, branch publishing continued through the authenticated connector |
+| first PDF workflow run `29859649872` | failed; strict TeX build exposed one undefined `\N` macro left after preamble cleanup |
+| replace the remaining `\N` use with `\mathbb{N}` | completed |
+| second PDF workflow run `29859961177` | 0; successful three-page A4 `pdfTeX-1.40.29` build |
+| inspect second-run compiler log | found a 24.9321 pt overfull box in the inline Lean declaration paragraph |
+| replace rigid `\texttt` declaration names with breakable `\nolinkurl` forms | completed |
+| final source-build PDF workflow run `29860316672` | 0; strict compile and artifact upload succeeded |
+| inspect final compiler log | 0; final pass had no unresolved references and no overfull or underfull boxes |
+| download artifact `8507045231` and check ZIP SHA-256 | 0; `669a607e...d621c`, matching GitHub's digest |
+| `pdfinfo` on the corrected artifact | 0; `pdfTeX-1.40.29`, three A4 pages |
+| render all three pages at 140 dpi and inspect each page | 0; no clipping, overlap, malformed equation, bad break, isolated heading, tiny text, or excessive blank-space defect |
+| `pdftotext paper/a211420_formalized.pdf -` using the bundled Poppler binary | 0; theorem, interval table, endpoint statement, formal names, and references extracted |
+| install the corrected TeX-built PDF | 0 |
+| final TeX/PDF/Lean SHA-256 query | 0; TeX `b98a2386...e404`, PDF `b8e8a491...7033`, Lean unchanged `96a2f752...b186` |
+| final `./scripts/verify.sh` after the PDF, report, and ledger updates | 0; 2,721-job primary build, separate Aristotle compile, and forbidden-source gate passed |
+
+The three-page length is shorter than the nonbinding five-to-eight-page
+preference. No padding was introduced: the article is visually readable and
+contains the complete self-contained proof.

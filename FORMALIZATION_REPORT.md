@@ -279,3 +279,41 @@ file, preventing a stale binary from passing as a successful TeX build.
   Lean theorem or a priority claim.
 
 None of these extensions is part of the mandatory theorem.
+
+## Publication-quality `amsart` rewrite
+
+The mathematical paper was rewritten on branch `rewrite-paper-amsart` as a
+conventional, concise number-theory article using `amsart`, A4 paper, and
+one-inch margins. The rewrite changes exposition only. It retains exactly the
+proved theorem, the integrality-before-divisibility order, the prime-power
+argument, the `q = 8*r` endpoint, positivity of `L r ^ r`, and the established
+prior-work boundary. No unformalized extension was added.
+
+`A211420.lean` remained byte-for-byte unchanged before and after the rewrite at
+SHA-256
+`96a2f752cd8f0331a6b5cf8d3a431df4a00f5e905b212691e408028f5937b186`.
+The separate Aristotle source, theorem signatures, Lean toolchain, mathlib
+pin, and Lake files were likewise unchanged.
+
+The former paper was a four-page US-letter article. The revised paper is a
+three-page A4 `amsart` article; clarity was preferred to artificial padding to
+the suggested five-to-eight-page range. It has a five-sentence abstract, three
+numbered sections, two supporting lemmas, one main theorem, and a conventional
+bibliography. The final source and installed PDF digests are:
+
+- `paper/a211420_formalized.tex`:
+  `b98a2386934114d990ede2ba319823d6c7e9518a3ce9f33e68d70c89919ce404`;
+- `paper/a211420_formalized.pdf`:
+  `b8e8a49161e0d5ec65153f1e1762ec4a7e60867657aefebcec6a9ba40e827033`.
+
+PDF workflow run
+[`29860316672`](https://github.com/DannyExperiments/a211420-fixed-divisor/actions/runs/29860316672)
+compiled the final source with `pdfTeX-1.40.29` and strict `latexmk` flags.
+Artifact `8507045231` had ZIP SHA-256
+`669a607ee9d1a79cc666f77e168ebba3e72a38732d3a17a14b291be19a7d621c`.
+The final TeX pass had no unresolved references and no overfull or underfull
+boxes. All three pages were rendered and inspected at high resolution: no
+clipping, malformed formula, bad page break, isolated heading, cramped text,
+or excessive-width equation was found. `pdftotext` extraction was also
+inspected and contained the complete theorem, interval table, endpoint
+sentence, formal theorem names, and bibliography.
