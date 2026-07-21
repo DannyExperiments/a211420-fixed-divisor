@@ -145,3 +145,10 @@ The two later Pro transcripts report exact searches over 120,006,000 and
 60,003,000 triples respectively. Those numbers are preserved as transcript
 claims, not as locally replayed computations. The locally reproducible
 checkers and logs remain under `checks/`.
+
+The integration was committed through the authenticated GitHub connector as
+`dd70f2e1c7a02dda1dfbba7a7ca8cd13c91ec9d7`. Lean workflow run
+`29845929949` then succeeded in 5m 24s, including bundled `leanchecker`
+replay and the repository verifier's independent Aristotle compile. A
+publication-approval prompt was added only after that successful result was
+observed.

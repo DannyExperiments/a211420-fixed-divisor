@@ -154,6 +154,12 @@ with `leanchecker: true`. On Lean 4.30 this invokes the bundled `leanchecker`
 to replay the compiled module through the Lean kernel, guarding against an
 invalid environment assembled by metaprogramming.
 
+After integrating the independent Aristotle source, Lean workflow run
+`29845929949` succeeded in 5m 24s at commit
+`dd70f2e1c7a02dda1dfbba7a7ca8cd13c91ec9d7`. It completed the primary
+build, bundled-kernel replay, independent-source compile, and forbidden-source
+gate.
+
 An external `nanoda` check was also attempted with `nanoda-allow-sorry:
 false` in workflow run `29841907020`. The ordinary `lake build` succeeded
 (`2,721` jobs), `lean4export` detected and exported module `A211420`, and
