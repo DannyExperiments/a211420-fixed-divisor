@@ -1,0 +1,195 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[hidelinks]{hyperref}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\floor}[1]{\left\lfloor #1\right\rfloor}
+
+\title{A Formally Verified Divisibility Theorem for A211420}
+\author{}
+\date{21 July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+\small
+Ordinary proof generated with OpenAI GPT-5.6 Pro.\par
+Lean 4 formalization and repository preparation by OpenAI Codex.\par
+Initiated, curated, and published by Danny Cabezas.
+\end{center}
+
+\section{Statement}
+
+For $n,r,k\in\N$, put
+\[
+ A_{\rm num}(n)=(8n)!\,n!,\qquad
+ A_{\rm den}(n)=(4n)!(3n)!(2n)!,
+\]
+\[
+ D_{k,r}(n)=\prod_{i=1}^{r}(kn+i),\qquad
+ L_r=\operatorname{lcm}(1,2,\ldots,8r-1).
+\]
+
+\begin{theorem}[Strengthened A211420 divisibility]\label{thm:main}
+For every $n\geq0$, every $r\geq1$, and every $k\in\{1,2,3\}$,
+\[
+ A_{\rm den}(n)\mid A_{\rm num}(n)
+\]
+and
+\[
+ D_{k,r}(n)A_{\rm den}(n)\mid L_r^r A_{\rm num}(n).
+\]
+Consequently, with the exact integer quotient
+\[
+ a_n=\frac{A_{\rm num}(n)}{A_{\rm den}(n)},
+\]
+one has $L_r^r>0$ and
+\[
+ D_{k,r}(n)\mid L_r^r a_n.
+\]
+\end{theorem}
+
+\section{Ordinary mathematical proof}
+
+For a prime $p$, initially interpret $v_p$ as the valuation on positive
+rational numbers. Define the one-periodic Landau step function
+\[
+ \Delta(x)=\floor{8x}+\floor{x}-\floor{4x}-\floor{3x}-\floor{2x}.
+\]
+The coefficient balance $8+1-4-3-2=0$ gives
+$\Delta(x+1)=\Delta(x)$. On $[0,1)$ the relevant breakpoints are
+\[
+0,\frac18,\frac14,\frac13,\frac38,\frac12,
+\frac58,\frac23,\frac34,\frac78,1.
+\]
+Direct evaluation on the intervening half-open intervals gives
+\[
+\Delta(x)=1
+\quad\Longleftrightarrow\quad
+\{x\}\in
+\left[\frac18,\frac13\right)
+\cup\left[\frac38,\frac12\right)
+\cup\left[\frac58,\frac23\right)
+\cup\left[\frac78,1\right),
+\]
+and $\Delta(x)=0$ otherwise. In particular, $\Delta\geq0$.
+
+Legendre's formula gives the finite identity
+\[
+ v_p\!\left(\frac{A_{\rm num}(n)}{A_{\rm den}(n)}\right)
+ =\sum_{j\geq1}\Delta\!\left(\frac{n}{p^j}\right).
+\]
+Indeed, all summands vanish when $p^j>8n$. Every prime valuation of the
+positive rational factorial quotient is therefore nonnegative. It follows
+that $A_{\rm den}(n)\mid A_{\rm num}(n)$ and $a_n$ is a positive integer.
+
+For a prime power $q=p^j$, define
+\[
+ N_q=\#\{i\in\{1,\ldots,r\}:q\mid kn+i\}.
+\]
+Then
+\[
+ v_p(D_{k,r}(n))=\sum_{j\geq1}N_{p^j},
+\]
+again with only finitely many nonzero terms.
+
+Suppose first that $q\geq8r$. Then $q>r$, so at most one integer among
+$kn+1,\ldots,kn+r$ is divisible by $q$ and $N_q\leq1$. If
+$q\mid kn+i$, write $kn+i=mq$. Then
+\[
+ \frac nq=\frac mk-\frac{i}{kq},
+ \qquad 0<\frac{i}{kq}\leq\frac1{8k}.
+\]
+For $k=1$, the fractional part of $n/q$ lies in $[7/8,1)$. For $k=2$,
+according as $m$ is even or odd, it lies in $[15/16,1)$ or
+$[7/16,1/2)$. For $k=3$, according to $m$ modulo $3$, it lies in
+\[
+[23/24,1),\qquad [7/24,1/3),\qquad [5/8,2/3).
+\]
+Every displayed interval is contained in the support of $\Delta$. The
+included left endpoints cover the equality case $q=8r$ and $i=r$.
+Consequently
+\[
+ N_q\leq\Delta(n/q)\qquad(q\geq8r).
+\]
+
+For $q=p^j<8r$, use the elementary bound $N_q\leq r$. The exact definition
+of $L_r$ gives
+\[
+ v_p(L_r)=\#\{j\geq1:p^j<8r\}.
+\]
+Therefore, for every prime $p$,
+\begin{align*}
+v_p(D_{k,r}(n))
+ &=\sum_{p^j<8r}N_{p^j}+\sum_{p^j\geq8r}N_{p^j}\\
+ &\leq r\,v_p(L_r)+\sum_{p^j\geq8r}\Delta(n/p^j)\\
+ &\leq r\,v_p(L_r)+\sum_{j\geq1}\Delta(n/p^j)\\
+ &=v_p(L_r^r a_n).
+\end{align*}
+The second inequality uses $\Delta\geq0$ for the omitted small powers.
+Prime-by-prime comparison proves $D_{k,r}(n)\mid L_r^r a_n$.
+Finally, $L_r$ is a nonzero least common multiple, so $L_r^r>0$.
+This proves Theorem~\ref{thm:main}.
+
+\section{Lean verification}
+
+The Lean project defines
+\[
+\texttt{L r = Nat.lcmUpto (8 * r - 1)},
+\]
+which is exactly the lcm of $1,\ldots,8r-1$. The principal declarations are
+\begin{verbatim}
+A211420.integral_cross
+A211420.strengthened_cross
+A211420.constant_pos
+A211420.ADen_mul_a
+A211420.strengthened
+\end{verbatim}
+The primary theorem is division-free; the quotient corollary is derived only
+after exact factorial-ratio integrality is established.
+
+The project is pinned to Lean 4.30.0, commit
+\texttt{d024af099ca4bf2c86f649261ebf59565dc8c622}, and mathlib v4.30.0,
+commit \texttt{c5ea00351c28e24afc9f0f84379aa41082b1188f}. From the repository root,
+run
+\begin{verbatim}
+./scripts/verify.sh
+\end{verbatim}
+to build the project and reject forbidden proof escapes in project Lean files.
+
+\section{Scope and provenance boundary}
+
+The theorem displayed above is kernel-checked. Finite computations were used
+only for falsification and diagnosis, not as proof. The two adversarial reports
+distributed with the repository are AI-generated checks, not human peer
+review. No claim of historical priority, minimality of $L_r^r$, or formal
+verification of additional proposed variants is made.
+
+The searches supplied with this project found no prior source for the exact
+$L_r^r$ strengthening, but bounded searches cannot certify originality. The
+integrality background belongs to the classical Landau factorial-ratio
+framework; see Bober's classification and the work of Rodriguez-Villegas.
+
+\begin{thebibliography}{9}
+\bibitem{Bober2009}
+J. W. Bober,
+\emph{Factorial ratios, hypergeometric series, and a family of step functions},
+J. London Math. Soc. (2) \textbf{79} (2009), 422--444.
+
+\bibitem{Landau1900}
+E. Landau,
+\emph{Sur les conditions de divisibilit\'e d'un produit de factorielles par un autre},
+Nouvelles annales de math\'ematiques, 3e s\'erie, \textbf{19} (1900), 344--362.
+
+\bibitem{RV2007}
+F. Rodriguez-Villegas,
+\emph{Integral ratios of factorials and algebraic hypergeometric functions},
+arXiv:math/0701362 (2007).
+\end{thebibliography}
+
+\end{document}

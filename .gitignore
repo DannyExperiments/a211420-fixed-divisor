@@ -1,0 +1,12 @@
+/.lake/
+/.DS_Store
+/**/*.DS_Store
+/A211420_Lean_Formalization_v1.zip
+/A211420_Lean_Formalization_v1/
+/output/
+/tmp/
+/paper/*.aux
+/paper/*.fdb_latexmk
+/paper/*.fls
+/paper/*.log
+/paper/*.out

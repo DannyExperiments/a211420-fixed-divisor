@@ -1,0 +1,7 @@
+PASS
+range: 0 <= n <= 10000, 1 <= r <= 1000, k in {1,2,3}
+triples checked: 30003000
+prime-factor updates checked: 75347906
+minimum valuation slack: 0
+one minimum case: n=1 k=2 r=1 p=3 lhs=1 rhs=1
+elapsed_seconds=10.14

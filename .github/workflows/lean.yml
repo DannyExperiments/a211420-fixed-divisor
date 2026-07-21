@@ -1,0 +1,26 @@
+name: Lean verification
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and independently check Lean declarations
+        uses: leanprover/lean-action@v1
+        with:
+          build: true
+          nanoda: true
+          nanoda-allow-sorry: false
+          use-mathlib-cache: true
+      - name: Reject forbidden project proof escapes
+        run: ./scripts/verify.sh
