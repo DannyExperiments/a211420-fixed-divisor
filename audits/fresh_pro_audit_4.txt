@@ -1,0 +1,2282 @@
+A211420 adversarial audit — fresh GPT-5.6 Pro instance 4
+Source: https://chatgpt.com/s/t_6a5f90aba088819181288bad94fb357f
+Captured: 2026-07-21 (Asia/Bangkok)
+Status: AI-generated audit transcript; not human peer review.
+Preservation note: visible shared-page text captured verbatim; mathematical layout is plain text.
+This is a copy of a shared ChatGPT conversation
+
+Report conversation
+
+I’ll separate the proof audit, exact-arithmetic search, formalization attempt, and independent priority review, treating all novelty conclusions as provisional and source-bounded.
+
+The main vulnerability is the large-prime-power interval step; exact endpoint checks support all three k-cases, including q=8r, while I test whether broader results subsume it.
+
+No exact-valuation counterexample emerged; provisionally, the explicit L
+r
+r
+	​
+
+ bound is unrecorded, while the weaker factorial bound follows from a classical multivariate Landau criterion.
+
+The proof needs explicit valuation-domain, integrality, and nonnegative omitted-term justifications, but no theorem change. Exact searches now cover 60,003,000 triples; the large-prime-power lemma remains essential.
+
+Referee report
+Executive verdicts
+
+Audit A — mathematical correctness: CORRECT AFTER SPECIFIED REPAIRS.
+Confidence: high, approximately 0.99.
+
+The proposed theorem is true, and the prime-power argument proves the stated constant
+
+C(k,r)=L
+r
+r
+	​
+
+,L
+r
+	​
+
+=lcm(1,…,8r−1).
+
+The repairs are formal rather than substantive: define v
+p
+	​
+
+ on positive rationals, explicitly prove a
+n
+	​
+
+∈Z, state that all valuation sums are finite, and use Δ≥0 when discarding the small-prime-power terms from v
+p
+	​
+
+(a
+n
+	​
+
+).
+
+Audit B — provenance and priority:
+
+For the sharp strengthening L
+r
+r
+	​
+
+: no prior art found in the searched sources.
+Confidence: moderate, approximately 0.75, because priority searches cannot certify absence.
+
+For the weaker OEIS existence statement, and specifically the proposed larger constant ((8r)!)
+r
+: it is a direct corollary of Landau’s classical multivariate factorial-ratio criterion, after an explicit two-variable substitution and a short step-function verification.
+Confidence: high, approximately 0.98.
+
+I found no source recording that particular Landau substitution, but that is not enough to claim that it is new.
+
+The current OEIS entry states the k=1,2,3 conjecture and attributes it to Peter Bala, dated August 26, 2025. Its revision history shows that the initial August 26 version concerned the odd progression for k=2, and the current consecutive-factor formulation for all three k's was added on August 27, 2025. 
+OEIS
++1
+
+Audit A: mathematical correctness
+1. Strongest objection
+
+The most serious defect in the proof as written is the transition from inequalities of valuations to an integer divisibility statement without first specifying that v
+p
+	​
+
+ is being applied to a rational number and without explicitly proving that a
+n
+	​
+
+ is an integer.
+
+Legendre’s formula initially gives
+
+v
+p
+	​
+
+(a
+n
+	​
+
+)
+
+as the valuation of a positive rational factorial quotient. This is legitimate if v
+p
+	​
+
+:Q
+>0
+	​
+
+→Z is being used, but one must then establish either:
+
+a
+n
+	​
+
+∈Z, before writing D
+k,r
+	​
+
+(n)∣L
+r
+r
+	​
+
+a
+n
+	​
+
+; or
+
+directly that
+
+D
+k,r
+	​
+
+(n)
+L
+r
+r
+	​
+
+a
+n
+	​
+
+	​
+
+
+is a positive rational with nonnegative valuation at every prime, hence an integer.
+
+The proof supplies exactly what is needed because Δ≥0. It merely fails to state the closure argument.
+
+A second omitted step occurs in the final inequality:
+
+p
+j
+≥8r
+∑
+	​
+
+Δ(n/p
+j
+)≤v
+p
+	​
+
+(a
+n
+	​
+
+).
+
+This uses Δ≥0 for all omitted powers p
+j
+<8r. Again, this is true but should be explicit.
+
+Neither defect changes the theorem or its constant.
+
+2. Exact computation of Δ
+
+Because the coefficients satisfy
+
+8+1−4−3−2=0,
+
+one has
+
+Δ(x+1)=Δ(x).
+
+On [0,1), all breakpoints of the constituent floor functions are
+
+0, 
+8
+1
+	​
+
+, 
+4
+1
+	​
+
+, 
+3
+1
+	​
+
+, 
+8
+3
+	​
+
+, 
+2
+1
+	​
+
+, 
+8
+5
+	​
+
+, 
+3
+2
+	​
+
+, 
+4
+3
+	​
+
+, 
+8
+7
+	​
+
+, 1.
+
+The complete table is:
+
+Interval	Δ(x)
+[0,
+8
+1
+	​
+
+)	0
+[
+8
+1
+	​
+
+,
+4
+1
+	​
+
+)	1
+[
+4
+1
+	​
+
+,
+3
+1
+	​
+
+)	1
+[
+3
+1
+	​
+
+,
+8
+3
+	​
+
+)	0
+[
+8
+3
+	​
+
+,
+2
+1
+	​
+
+)	1
+[
+2
+1
+	​
+
+,
+8
+5
+	​
+
+)	0
+[
+8
+5
+	​
+
+,
+3
+2
+	​
+
+)	1
+[
+3
+2
+	​
+
+,
+4
+3
+	​
+
+)	0
+[
+4
+3
+	​
+
+,
+8
+7
+	​
+
+)	0
+[
+8
+7
+	​
+
+,1)	1
+
+Thus
+
+Δ(x)∈{0,1},
+
+and
+
+supp(Δ)∩[0,1)=[
+8
+1
+	​
+
+,
+3
+1
+	​
+
+)∪[
+8
+3
+	​
+
+,
+2
+1
+	​
+
+)∪[
+8
+5
+	​
+
+,
+3
+2
+	​
+
+)∪[
+8
+7
+	​
+
+,1).
+
+The exact endpoint values are
+
+	​
+
+Δ(0)=0,Δ(1/8)=1,Δ(1/4)=1,Δ(1/3)=0,
+Δ(3/8)=1,Δ(1/2)=0,Δ(5/8)=1,Δ(2/3)=0,
+Δ(3/4)=0,Δ(7/8)=1,Δ(1)=0.
+	​
+
+
+The points 1/4 and 3/4 are breakpoints of individual summands but not genuine jumps of Δ. The half-open conventions in the proposed support are correct because floor functions are right-continuous.
+
+3. Legendre’s formula and integrality of a
+n
+	​
+
+
+Define v
+p
+	​
+
+ on Q
+>0
+	​
+
+. Legendre’s formula gives
+
+v
+p
+	​
+
+(N!)=
+j≥1
+∑
+	​
+
+⌊
+p
+j
+N
+	​
+
+⌋.
+
+Therefore
+
+v
+p
+	​
+
+(a
+n
+	​
+
+)
+	​
+
+=
+j≥1
+∑
+	​
+
+(⌊
+p
+j
+8n
+	​
+
+⌋+⌊
+p
+j
+n
+	​
+
+⌋−⌊
+p
+j
+4n
+	​
+
+⌋−⌊
+p
+j
+3n
+	​
+
+⌋−⌊
+p
+j
+2n
+	​
+
+⌋)
+=
+j≥1
+∑
+	​
+
+Δ(
+p
+j
+n
+	​
+
+).
+	​
+
+
+There is no convergence issue. If p
+j
+>8n, every displayed floor is zero, so only finitely many terms are nonzero. For n=0, the entire sum is zero and a
+0
+	​
+
+=1.
+
+Since Δ≥0,
+
+v
+p
+	​
+
+(a
+n
+	​
+
+)≥0
+
+for every prime p. A positive rational number whose valuations are nonnegative at every prime is an integer: write it in lowest terms, and any prime dividing its denominator would have negative valuation. Hence
+
+a
+n
+	​
+
+∈Z
+>0
+	​
+
+.
+
+This is also precisely the one-variable Landau criterion in this special case.
+
+4. Valuation of D
+k,r
+	​
+
+(n)
+
+Let
+
+D
+k,r
+	​
+
+(n)=
+i=1
+∏
+r
+	​
+
+(kn+i).
+
+Then
+
+v
+p
+	​
+
+(D
+k,r
+	​
+
+(n))
+	​
+
+=
+i=1
+∑
+r
+	​
+
+v
+p
+	​
+
+(kn+i)
+=
+i=1
+∑
+r
+	​
+
+j≥1
+∑
+	​
+
+1
+{p
+j
+∣kn+i}
+	​
+
+=
+j≥1
+∑
+	​
+
+N
+p
+j
+	​
+
+.
+	​
+
+
+This correctly counts repeated prime powers. For example, if p
+e
+∣kn+i, then the i-th factor contributes once to each of
+
+N
+p
+	​
+
+,N
+p
+2
+	​
+
+,…,N
+p
+e
+	​
+
+.
+
+All sums are finite.
+
+5. The bound N
+q
+	​
+
+≤1 for q≥8r
+
+In fact, only q>r−1 is needed.
+
+If q divides both kn+i and kn+i
+′
+, then
+
+q∣i−i
+′
+.
+
+For 1≤i,i
+′
+≤r and i
+
+=i
+′
+,
+
+0<∣i−i
+′
+∣≤r−1<q,
+
+which is impossible. Hence
+
+N
+q
+	​
+
+≤1.
+
+Because q≥8r implies q>r, the stated assertion is correct.
+
+6. Complete residue-class check
+
+Assume q=p
+j
+≥8r and q∣kn+i, where 1≤i≤r. Write
+
+kn+i=mq
+
+and put
+
+t=
+kq
+i
+	​
+
+.
+
+Then
+
+0<t≤
+8k
+1
+	​
+
+,
+
+with equality exactly when q=8r and i=r, and
+
+q
+n
+	​
+
+=
+k
+m
+	​
+
+−t.
+k=1
+
+Here m is integral and
+
+{
+q
+n
+	​
+
+}=1−t∈[
+8
+7
+	​
+
+,1).
+
+This lies in the fourth component of I.
+
+k=2
+
+If m≡0(mod2), then
+
+{
+q
+n
+	​
+
+}=1−t∈[
+16
+15
+	​
+
+,1)⊆[
+8
+7
+	​
+
+,1).
+
+If m≡1(mod2), then
+
+{
+q
+n
+	​
+
+}=
+2
+1
+	​
+
+−t∈[
+16
+7
+	​
+
+,
+2
+1
+	​
+
+)⊆[
+8
+3
+	​
+
+,
+2
+1
+	​
+
+).
+k=3
+
+If m≡0(mod3), then
+
+{
+q
+n
+	​
+
+}=1−t∈[
+24
+23
+	​
+
+,1)⊆[
+8
+7
+	​
+
+,1).
+
+If m≡1(mod3), then
+
+{
+q
+n
+	​
+
+}=
+3
+1
+	​
+
+−t∈[
+24
+7
+	​
+
+,
+3
+1
+	​
+
+)⊆[
+8
+1
+	​
+
+,
+3
+1
+	​
+
+).
+
+If m≡2(mod3), then
+
+{
+q
+n
+	​
+
+}=
+3
+2
+	​
+
+−t∈[
+8
+5
+	​
+
+,
+3
+2
+	​
+
+).
+
+Consequently, whenever q∣kn+i,
+
+Δ(n/q)=1.
+
+Since N
+q
+	​
+
+≤1,
+
+N
+q
+	​
+
+≤Δ(n/q).
+Edge cases
+
+q=8r, i=r: equality in the lower bound produces one of
+
+8
+7
+	​
+
+,
+16
+7
+	​
+
+,
+16
+15
+	​
+
+,
+24
+7
+	​
+
+,
+8
+5
+	​
+
+,
+24
+23
+	​
+
+.
+
+Every relevant lower endpoint is included.
+
+Right endpoints: never attained because i>0, hence t>0.
+
+n=0: then kn+i=i≤r<q, so no q≥8r divides a factor; thus N
+q
+	​
+
+=0.
+
+p∣k: harmless. The proof never divides a congruence by k modulo q; it only uses the exact equality kn+i=mq.
+
+Prime-power equality p
+j
+=8r: correctly belongs to the large-q part and is covered by the included endpoints.
+
+7. The least-common-multiple identity
+
+For a prime p,
+
+v
+p
+	​
+
+(L
+r
+	​
+
+)=max{e≥0:p
+e
+≤8r−1}.
+
+Because p
+e
+ is integral,
+
+p
+e
+≤8r−1⟺p
+e
+<8r.
+
+Therefore
+
+v
+p
+	​
+
+(L
+r
+	​
+
+)=#{j≥1:p
+j
+<8r}.
+
+This includes exactly the powers assigned to the small-prime-power part.
+
+8. Final valuation argument
+
+For every prime p,
+
+v
+p
+	​
+
+(D
+k,r
+	​
+
+(n))
+	​
+
+=
+p
+j
+<8r
+∑
+	​
+
+N
+p
+j
+	​
+
++
+p
+j
+≥8r
+∑
+	​
+
+N
+p
+j
+	​
+
+≤r#{j:p
+j
+<8r}+
+p
+j
+≥8r
+∑
+	​
+
+Δ(n/p
+j
+)
+=rv
+p
+	​
+
+(L
+r
+	​
+
+)+
+p
+j
+≥8r
+∑
+	​
+
+Δ(n/p
+j
+)
+≤rv
+p
+	​
+
+(L
+r
+	​
+
+)+
+j≥1
+∑
+	​
+
+Δ(n/p
+j
+)
+=rv
+p
+	​
+
+(L
+r
+	​
+
+)+v
+p
+	​
+
+(a
+n
+	​
+
+)
+=v
+p
+	​
+
+(L
+r
+r
+	​
+
+a
+n
+	​
+
+).
+	​
+
+
+The penultimate inequality is where the proof must explicitly invoke
+
+Δ(x)≥0.
+
+Since D
+k,r
+	​
+
+(n) and L
+r
+r
+	​
+
+a
+n
+	​
+
+ are positive integers, the prime-by-prime inequalities imply
+
+D
+k,r
+	​
+
+(n)∣L
+r
+r
+	​
+
+a
+n
+	​
+
+.
+
+Thus the theorem is proved with
+
+C(k,r)=L
+r
+r
+	​
+
+>0.
+
+The same constant works for all three k's.
+
+Because
+
+L
+r
+	​
+
+∣(8r−1)!∣(8r)!,
+
+both
+
+((8r−1)!)
+r
+and((8r)!)
+r
+
+also work.
+
+9. Counterexample search
+
+Two independent exact searches found no counterexample.
+
+Large optimized search
+
+The search covered
+
+0≤n≤10,000,1≤r≤1,000,k∈{1,2,3}.
+
+That is:
+
+30,003,000 triples (n,r,k);
+
+75,347,906 exact prime-valuation checks;
+
+integer floor arithmetic only;
+
+no factorials converted to floating point;
+
+no counterexample.
+
+The minimum checked slack was zero, attained, for example, at
+
+n=1,r=1,k=2,p=3.
+
+The optimized search checks a prime whenever its left-hand valuation changes. This is sufficient because, for fixed n,p,
+
+v
+p
+	​
+
+(a
+n
+	​
+
+)+rv
+p
+	​
+
+(L
+r
+	​
+
+)
+
+is nondecreasing in r, whereas v
+p
+	​
+
+(D
+k,r
+	​
+
+(n)) changes only when p∣kn+r.
+
+a211420_exact_search.cpp
+Large-search run log
+
+Source SHA-256:
+
+cb62c94bf1587f572ee1ea708484ce17341101f2711ddb21529c59aef4377cbb
+Independent direct search
+
+A separate direct implementation recomputed v
+p
+	​
+
+(D) from its defining product and tested every relevant prime for
+
+0≤n≤150,1≤r≤60,k∈{1,2,3}.
+
+It checked:
+
+27,180 triples;
+
+2,636,460 prime inequalities;
+
+no counterexample.
+
+a211420_direct_check.py
+Independent check log
+
+These computations support the audit, but the correctness verdict rests on the valuation proof, not on the computation.
+
+10. Does it prove the intended OEIS statement?
+
+Yes.
+
+The current OEIS assertion asks for a constant C(k,r), independent of n, such that
+
+(kn+1)⋯(kn+r)
+C(k,r)a
+n
+	​
+
+	​
+
+
+is integral for every n. It does not literally state C(k,r)>0, but the displayed examples 35,3,5 and the intended divisibility language make the nonzero positive interpretation clear. 
+OEIS
+
+The proof gives the explicit positive integer
+
+C(k,r)=L
+r
+r
+	​
+
+≥1,
+
+independent of n. It therefore proves a nonvacuous statement strictly stronger than the intended conjecture.
+
+11. Formalization status
+
+No Lean 4, Isabelle, or Coq executable was available in the audit environment, so I did not complete or claim a machine-checked proof.
+
+A clean formal specification should avoid natural-number division and state the result in cross-multiplied form. For example, the intended Lean-style specification is:
+
+lean
+def ANum (n : ℕ) : ℕ :=
+  (8 * n).factorial * n.factorial
+
+def ADen (n : ℕ) : ℕ :=
+  (4 * n).factorial * (3 * n).factorial * (2 * n).factorial
+
+def D (k r n : ℕ) : ℕ :=
+  ∏ i in Finset.range r, (k * n + (i + 1))
+
+def L (r : ℕ) : ℕ :=
+  (Finset.range (8 * r - 1)).lcm (fun i => i + 1)
+
+theorem a211420_strengthened
+    (n r k : ℕ)
+    (hr : 0 < r)
+    (hk : k = 1 ∨ k = 2 ∨ k = 3) :
+    0 < L r ^ r ∧
+    ADen n ∣ ANum n ∧
+    D k r n * ADen n ∣ L r ^ r * ANum n := by
+  ...
+
+The final conjunct is equivalent to the desired divisibility once
+
+ADen(n)∣ANum(n)
+
+has been established. This formulation explicitly asserts that the constant L
+r
+r
+	​
+
+ is positive and cannot be satisfied vacuously by C=0.
+
+Audit B: provenance, literature, and priority
+1. Closest prior result: Landau’s multivariate criterion
+Bibliographic record
+
+Edmund Landau, “Sur les conditions de divisibilité d’un produit de factorielles par un autre,” Nouvelles annales de mathématiques, 3rd series, 19 (1900), 344–362.
+
+Relevant conclusion: pp. 354–355.
+
+DOI: none located.
+
+arXiv: none.
+
+MR/Zbl: none located; the paper predates those databases.
+
+Landau proves the necessary-and-sufficient nonnegativity criterion for factorial ratios built from nonnegative integral linear forms. A modern exact restatement appears as Bober’s Theorem 3.1, p. 7: the factorial ratio is integral for all nonnegative integer inputs iff the associated floor step function is nonnegative on the unit cube. 
+Numdam
++1
+
+Exact substitution
+
+Fix k∈{1,2,3} and r≥1. Introduce a second nonnegative integer t and define
+
+B
+k,r
+	​
+
+(n,t)=
+(4n)!(3n)!(2n)!(kn+rt)!
+(8n)!n!(kn)!((8r)t)!
+r
+	​
+
+.
+
+At t=1,
+
+B
+k,r
+	​
+
+(n,1)
+	​
+
+=
+(4n)!(3n)!(2n)!(kn+r)!
+((8r)!)
+r
+(8n)!n!(kn)!
+	​
+
+=
+(kn+1)(kn+2)⋯(kn+r)
+((8r)!)
+r
+a
+n
+	​
+
+	​
+
+.
+	​
+
+
+The associated two-variable Landau function is
+
+G(x,y)=Δ(x)+⌊kx⌋+r⌊8ry⌋−⌊kx+ry⌋.
+
+Set
+
+E=⌊kx+ry⌋−⌊kx⌋.
+
+If y≥1/(8r), then
+
+r⌊8ry⌋≥randE≤r,
+
+so G(x,y)≥Δ(x)≥0.
+
+If 0≤y<1/(8r), then 0≤ry<1/8 and E∈{0,1}.
+
+If E=0, then G=Δ≥0.
+
+If E=1, then
+
+{kx}+ry≥1,hence{kx}>7/8.
+
+For k=1,2,3, this forces x into exactly the same support intervals used in the candidate proof:
+
+k
+1
+2
+3
+	​
+
+{kx}>7/8 forces
+x∈(7/8,1)
+x∈(7/16,1/2)∪(15/16,1)
+x∈(7/24,1/3)∪(5/8,2/3)∪(23/24,1).
+	​
+
+	​
+
+
+Thus Δ(x)=1 and G=0.
+
+Therefore G≥0 on [0,1]
+2
+, so Landau’s theorem gives
+
+B
+k,r
+	​
+
+(n,t)∈Z
+
+for all n,t≥0. Taking t=1 proves
+
+(kn+1)⋯(kn+r)∣((8r)!)
+r
+a
+n
+	​
+
+.
+Classification
+
+For the OEIS existence conjecture and the constant ((8r)!)
+r
+:
+DIRECT COROLLARY OF A MORE GENERAL RESULT.
+
+For the sharper constant L
+r
+r
+	​
+
+:
+SAME METHOD BUT NOT THE RESULT.
+
+This is the closest prior result. It materially weakens any priority claim for the existence theorem, even though I found no source spelling out this exact substitution.
+
+2. Bober 2009
+
+Jonathan W. Bober, “Factorial ratios, hypergeometric series, and a family of step functions,” Journal of the London Mathematical Society (2) 79 (2009), no. 2, 422–444.
+
+DOI: 10.1112/jlms/jdn078.
+
+arXiv: 0709.1977.
+
+MR: MR2496522.
+
+Zbl identifier: not independently verified in this audit. 
+arXiv
+
+Theorem 1.2, arXiv p. 3
+
+Bober’s third infinite family is
+
+u
+n
+	​
+
+(a,b)=
+(an)!(2bn)!((a−b)n)!
+(2an)!(bn)!
+	​
+
+,a>b,(a,b)=1.
+
+Substituting
+
+a=4,b=1
+
+gives exactly
+
+u
+n
+	​
+
+(4,1)=
+(4n)!(2n)!(3n)!
+(8n)!n!
+	​
+
+=a
+n
+	​
+
+.
+
+Thus Bober proves that a
+n
+	​
+
+ is integral. He does not establish divisibility by a growing product (kn+1)⋯(kn+r), nor a fixed multiplier for that quotient. 
+arXiv
+
+Classification: SAME METHOD BUT NOT THE RESULT.
+
+Theorem 3.1, arXiv p. 7
+
+This is the multivariate Landau theorem used above. It does imply the coarse OEIS bound after the new substitution B
+k,r
+	​
+
+(n,t). 
+arXiv
+
+Classification for the coarse bound: DIRECT COROLLARY OF A MORE GENERAL RESULT.
+
+Theorem 4.6, arXiv pp. 12–13
+
+For a balanced one-variable factorial ratio, the generating function is algebraic precisely in the height-one integral case. This explains the algebraicity of the generating function of a
+n
+	​
+
+, but not the target divisibility. 
+arXiv
+
+Classification: RELATED BUT INSUFFICIENT.
+
+3. Rodriguez-Villegas
+
+Fernando Rodriguez-Villegas, “Integral ratios of factorials and algebraic hypergeometric functions,” Oberwolfach Reports 2 (2005), no. 3, 1813–1816; preprint arXiv:math/0701362.
+
+Article-level DOI: none found in the searched sources.
+
+MR/Zbl: none independently verified.
+
+Theorem 1, preprint p. 1
+
+For a regular finitely supported sequence γ, the associated generating function is “algebraic iff γ is integral and d=1.” 
+arXiv
+
+For the present sequence, take
+
+γ
+8
+	​
+
+=γ
+1
+	​
+
+=1,γ
+4
+	​
+
+=γ
+3
+	​
+
+=γ
+2
+	​
+
+=−1,
+
+and all other γ
+ν
+	​
+
+=0. Then
+
+a
+n
+	​
+
+=
+ν≥1
+∏
+	​
+
+(νn)!
+γ
+ν
+	​
+
+.
+
+It is regular because
+
+8+1−4−3−2=0,
+
+and its dimension is
+
+d=−
+ν
+∑
+	​
+
+γ
+ν
+	​
+
+=1.
+
+Rodriguez-Villegas’s theorem therefore connects the integrality of a
+n
+	​
+
+ to the algebraicity of its generating function. The paper also states the one-variable Landau valuation formula and criterion. 
+arXiv
+
+It does not produce a fixed constant for division by D
+k,r
+	​
+
+(n).
+
+Classification: RELATED BUT INSUFFICIENT.
+
+4. Bell–Bober
+
+Jason P. Bell and Jonathan W. Bober, “Bounded step functions and factorial ratio sequences,” International Journal of Number Theory 5 (2009), no. 8, 1419–1431.
+
+DOI: 10.1142/S1793042109002742.
+
+arXiv: 0710.3459.
+
+MR/Zbl: not independently verified. 
+University of Bristol
+
+Theorem 1.1, arXiv p. 2
+
+For a balanced nonnegative factorial-ratio step function of height D=L−K, the theorem bounds the total number of factorial factors:
+
+K+L≪D
+2
+(logD)
+2
+.
+
+It is a structural finiteness/boundedness result, not a theorem about division of a particular integral factorial ratio by linear factors. 
+arXiv
+
+There is no substitution that yields
+
+D
+k,r
+	​
+
+(n)∣Ca
+n
+	​
+
+.
+
+Classification: RELATED BUT INSUFFICIENT.
+
+5. Soundararajan
+
+K. Soundararajan, “Integral factorial ratios,” Duke Mathematical Journal 171 (2022), no. 3, 633–672.
+
+DOI: 10.1215/00127094-2021-0017.
+
+arXiv: 1901.05133.
+
+MR: MR4383251.
+
+Zbl: not independently verified.
+
+Theorem 1.1, p. 1
+
+The theorem rederives the complete height-one classification: three infinite families and 52 sporadic cases. The third family contains a
+n
+	​
+
+ under a=4,b=1. 
+arXiv
+
+No fixed-denominator or rising-factorial divisibility theorem is stated.
+
+Classification: SAME METHOD BUT NOT THE RESULT.
+
+A companion paper, K. Soundararajan, “Integral factorial ratios: irreducible examples with height larger than 1,” Philosophical Transactions of the Royal Society A 378 (2020), article 20180444, arXiv:1906.06413, constructs and studies higher-height factorial-ratio families. Its introduction explicitly traces the height-one classification through Rodriguez-Villegas and Bober, but its results concern classification and irreducibility, not the target divisibility. 
+arXiv
++1
+
+Classification: RELATED BUT INSUFFICIENT.
+
+6. Adolphson–Sperber
+2020 paper
+
+Alan Adolphson and Steven Sperber, “On the integrality of factorial ratios and mirror maps,” INTEGERS 20 (2020), A10, 15 pp.; arXiv:1802.08348.
+
+Theorem 1, p. 2
+
+The paper gives a modern multivariate statement of Landau’s theorem: under the balanced condition, the ratio is integral for all nonnegative integer vectors iff the associated step function is nonnegative on [0,1)
+r
+. Its subsequent remark states that without balance the criterion remains valid with [0,1]. 
+Colgate Math
++1
+
+The auxiliary ratio B
+k,r
+	​
+
+(n,t) is unbalanced in the t-variable, so the remark is the exact applicable version. It yields the coarse constant after the verification above.
+
+Classification for ((8r)!)
+r
+: DIRECT COROLLARY OF A MORE GENERAL RESULT.
+
+Classification for L
+r
+r
+	​
+
+: SAME METHOD BUT NOT THE RESULT.
+
+2021 paper
+
+Alan Adolphson and Steven Sperber, “On the integrality of hypergeometric series whose coefficients are factorial ratios,” Acta Arithmetica 200 (2021), 39–59.
+
+DOI: 10.4064/aa200427-5-4.
+
+arXiv: 2001.03296.
+
+Example 2, pp. 14–15, generalizes one direction of Landau’s theorem for A-hypergeometric series. It concerns integrality of multivariate factorial-ratio coefficients, not division of one fixed sequence by the rising products in the conjecture. 
+arXiv
++1
+
+Classification: RELATED BUT INSUFFICIENT.
+
+7. Mirror maps and Landau-function extensions
+Delaygue 2013
+
+Éric Delaygue, “A criterion for the integrality of the Taylor coefficients of mirror maps in several variables,” Advances in Mathematics 234 (2013), 414–452.
+
+DOI: 10.1016/j.aim.2012.09.028.
+
+arXiv: 1108.4352. 
+arXiv
+
+Theorem 1, pp. 4–5, gives a Landau-function criterion for integrality of canonical coordinates or mirror maps. Its conclusion concerns coefficients of
+
+z
+k
+	​
+
+exp(G
+k
+	​
+
+/F),
+
+not the fixed multiplier needed to divide a
+n
+	​
+
+ by D
+k,r
+	​
+
+(n). 
+arXiv
+
+Classification: RELATED BUT INSUFFICIENT.
+
+Delaygue–Rivoal–Roques 2017
+
+Éric Delaygue, Tanguy Rivoal, and Julien Roques, “On Dwork’s p-adic formal congruences theorem and hypergeometric mirror maps,” Memoirs of the American Mathematical Society 246 (2017), no. 1163, v+94 pp.
+
+DOI: 10.1090/memo/1163.
+
+arXiv: 1309.5902. 
+American Mathematical Society
++1
+
+Theorem 1, p. 4 of the preprint, gives an explicit Eisenstein constant C
+α,β
+	​
+
+ for an N-integral hypergeometric series. Here N-integrality means that
+
+F
+α,β
+	​
+
+(cz)∈Z[[z]]
+
+for some rational c, so the n-th coefficient is multiplied by c
+n
+, not by one fixed integer independent of n. 
+arXiv
++1
+
+That distinction is decisive: an Eisenstein constant does not establish
+
+D
+k,r
+	​
+
+(n)∣Ca
+n
+	​
+
+
+with fixed C.
+
+Classification: RELATED BUT INSUFFICIENT.
+
+8. Recent denominator-bound literature
+
+Christian Krattenthaler and Tanguy Rivoal, “Arithmetic properties of the Taylor coefficients of differentially algebraic power series,” arXiv:2502.09259 (2025).
+
+No journal publication or journal DOI was found in the searched sources as of July 21, 2026. 
+arXiv
+
+Theorem 2, preprint pp. 8–9
+
+For nonlinear recurrences whose denominator contains split linear factors
+
+i
+∏
+	​
+
+(a
+i
+	​
+
+n+b
+i
+	​
+
+),
+
+the theorem gives effective denominator bounds of the form
+
+δ
+n+1
+(νn+ν)!
+2s
+.
+
+Its proof uses detailed p-adic control and a finite exceptional-prime factor. 
+arXiv
+
+This is methodologically close to the present problem because it separates uniform large-prime behavior from finitely many small primes. But its hypotheses and conclusions do not specialize to
+
+(kn+1)⋯(kn+r)
+a
+n
+	​
+
+	​
+
+
+with the fixed multiplier L
+r
+r
+	​
+
+.
+
+Classification: RELATED BUT INSUFFICIENT.
+
+9. Thesis, MathOverflow, and other screened sources
+
+Jonathan W. Bober, Integer Ratios of Factorials, Hypergeometric Functions, and Related Step Functions, PhD dissertation, University of Michigan, 2009, develops the same classification, hypergeometric, and step-function framework. No target fixed-denominator theorem was found in the thesis. 
+Deep Blue
+
+Classification: SAME METHOD BUT NOT THE RESULT.
+
+The MathOverflow question “Integer-valued factorial ratios,” asked by Wadim Zudilin in 2010, discusses the Legendre/Landau proof for Chebyshev’s factorial ratio and points to Bober’s classification. It contains no result about the A211420 rising-factorial denominator. 
+MathOverflow
+
+Classification: RELATED BUT INSUFFICIENT.
+
+I also screened literature on globally bounded hypergeometric series, Christol’s criterion, algebraic hypergeometric functions, G-functions, mirror maps, Lucas-type congruences, quotient singularities, and higher-height integral factorial ratios. Those theories concern integrality of the original factorial ratio, algebraicity, coefficient rescaling by C
+n
+, congruences, or classification. I found no theorem in them that directly supplies the sharp constant L
+r
+r
+	​
+
+.
+
+10. Hypergeometric reformulation and why global boundedness is insufficient
+
+The sequence can be written as
+
+a
+n
+	​
+
+=(
+27
+2
+14
+	​
+
+)
+n
+(1/3)
+n
+	​
+
+(1/2)
+n
+	​
+
+(2/3)
+n
+	​
+
+n!
+(1/8)
+n
+	​
+
+(3/8)
+n
+	​
+
+(5/8)
+n
+	​
+
+(7/8)
+n
+	​
+
+	​
+
+.
+
+This is the coefficient sequence of the 
+4
+	​
+
+F
+3
+	​
+
+ recorded in OEIS. 
+OEIS
+
+Moreover,
+
+kn+i
+1
+	​
+
+=
+i
+1
+	​
+
+(i/k+1)
+n
+	​
+
+(i/k)
+n
+	​
+
+	​
+
+,
+
+and therefore
+
+D
+k,r
+	​
+
+(n)
+a
+n
+	​
+
+	​
+
+=
+r!
+a
+n
+	​
+
+	​
+
+i=1
+∏
+r
+	​
+
+(i/k+1)
+n
+	​
+
+(i/k)
+n
+	​
+
+	​
+
+.
+
+This embeds the quotient into a generalized hypergeometric coefficient problem. But standard global boundedness gives a scaling
+
+C
+n
+D
+k,r
+	​
+
+(n)
+a
+n
+	​
+
+	​
+
+∈Z,
+
+not a fixed multiplier
+
+C
+D
+k,r
+	​
+
+(n)
+a
+n
+	​
+
+	​
+
+∈Z
+
+uniformly in n. Hence Christol/Eisenstein/G-function denominator results do not by themselves imply the conjecture.
+
+Required final report
+1. Correctness verdict and confidence
+
+CORRECT AFTER SPECIFIED REPAIRS.
+
+Confidence: high, 0.99.
+
+Necessary repairs:
+
+Define v
+p
+	​
+
+ on Q
+>0
+	​
+
+.
+
+Give the complete Δ-table and establish Δ≥0.
+
+State that the Legendre and product-valuation sums are finite.
+
+Deduce a
+n
+	​
+
+∈Z
+>0
+	​
+
+, or use the equivalent rational-valuation closure argument.
+
+Explicitly use Δ≥0 when replacing the large-p
+j
+ sum by v
+p
+	​
+
+(a
+n
+	​
+
+).
+
+State
+
+C(k,r)=L
+r
+r
+	​
+
+>0
+
+and conclude divisibility between positive integers.
+
+No alteration to the theorem or the constant is required.
+
+2. Prior-art verdict and confidence
+
+For the exact strengthening with L
+r
+r
+	​
+
+:
+
+No prior art found in the searched sources.
+
+Confidence: moderate, 0.75.
+
+For the weaker OEIS existence statement and the constant ((8r)!)
+r
+:
+
+DIRECT COROLLARY OF LANDAU’S MULTIVARIATE CRITERION, after the explicit auxiliary ratio B
+k,r
+	​
+
+(n,t) and the step-function check above.
+
+Confidence: high, 0.98.
+
+I found no source recording that exact auxiliary ratio or substitution. That is not proof that it was previously unknown.
+
+3. Strongest mathematical objection considered
+
+The proof initially treats a
+n
+	​
+
+ as though it were already an integer and concludes integer divisibility solely from valuations. The missing rational-to-integer step is logically necessary.
+
+After adding
+
+Δ≥0⟹v
+p
+	​
+
+(a
+n
+	​
+
+)≥0∀p⟹a
+n
+	​
+
+∈Z,
+
+and explicitly invoking Δ≥0 in the final truncation, the objection disappears.
+
+The most dangerous substantive boundary case,
+
+q=8r,i=r,
+
+also checks: it produces included left endpoints of the support intervals.
+
+4. Closest prior result and exact logical mapping
+
+The closest prior result is Landau’s 1900 multivariate factorial-ratio criterion, in the modern form of Bober’s Theorem 3.1.
+
+Use
+
+B
+k,r
+	​
+
+(n,t)=
+(4n)!(3n)!(2n)!(kn+rt)!
+(8n)!n!(kn)!((8r)t)!
+r
+	​
+
+.
+
+Its Landau step function is
+
+G(x,y)=Δ(x)+⌊kx⌋+r⌊8ry⌋−⌊kx+ry⌋.
+
+The residue-support check proves G≥0 on [0,1]
+2
+, so B
+k,r
+	​
+
+(n,t) is integral. Setting t=1 gives
+
+(kn+1)⋯(kn+r)
+((8r)!)
+r
+a
+n
+	​
+
+	​
+
+∈Z.
+
+That proves the OEIS conjecture but does not produce the sharper L
+r
+r
+	​
+
+.
+
+5. Sources searched and meaningful coverage gaps
+
+The search included:
+
+the exact identifier A211420 and its OEIS revision history;
+
+the exact factorial quotient in multiple orderings;
+
+its binomial representations and 
+4
+	​
+
+F
+3
+	​
+
+ parameters;
+
+rising factorial, Pochhammer, fixed denominator, fixed divisor, and polynomial-divisibility terminology;
+
+Landau’s original paper and modern statements;
+
+Bober, Rodriguez-Villegas, Bell–Bober, Soundararajan, Adolphson–Sperber, Delaygue, Delaygue–Rivoal–Roques, and Krattenthaler–Rivoal;
+
+Bober’s dissertation;
+
+MathOverflow and searches directed at Mathematics Stack Exchange;
+
+arXiv, journal/publisher pages, institutional repositories, theses, and representative citation descendants;
+
+French, German, Russian, and Chinese search variants;
+
+globally bounded hypergeometric series, Christol criteria, Eisenstein constants, G-functions, mirror maps, Lucas congruences, and p-adic denominator bounds.
+
+Meaningful gaps remain:
+
+no search can cover unpublished or private manuscripts;
+
+subscription-only MathSciNet and zbMATH citation graphs were not exhaustively traversable;
+
+Google Scholar and Semantic Scholar result sets were incomplete or access-limited;
+
+older nondigitized books and proceedings may not be full-text indexed;
+
+non-English institutional repositories are unevenly indexed;
+
+work circulated after the search date or under unrelated terminology may be missed.
+
+Accordingly, the negative result must remain source-bounded.
+
+6. Defensible wording
+“This proves the A211420 conjecture.”
+
+Yes, defensible.
+
+A more precise formulation is:
+
+This proves the current A211420 conjecture for k=1,2,3, with the explicit positive constant
+
+C(k,r)=lcm(1,…,8r−1)
+r
+.
+
+That statement is mathematically justified.
+
+“This is the first proof.”
+
+No, not presently defensible.
+
+Two independent reasons:
+
+No-prior-art searches cannot prove originality.
+
+The original existence conjecture with the coarser constant ((8r)!)
+r
+ is already a direct specialization of Landau’s 1900 multivariate criterion, although I found no source that records the specialization.
+
+The strongest defensible priority statement is:
+
+No prior proof of the explicit L
+r
+r
+	​
+
+ strengthening, and no prior publication of this exact prime-power cutoff argument, was found in the searched sources.
+
+Sources

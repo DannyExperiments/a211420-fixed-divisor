@@ -1,0 +1,32 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb}
+\begin{document}
+
+\section*{Verified result}
+For $n,r,k\in\mathbb N$, define
+\[
+ A_{\rm num}(n)=(8n)!n!,\qquad
+ A_{\rm den}(n)=(4n)!(3n)!(2n)!,
+\]
+\[
+ D(k,r,n)=\prod_{i=1}^{r}(kn+i),\qquad
+ L(r)=\operatorname{lcm}(1,2,\ldots,8r-1).
+\]
+Then:
+\begin{enumerate}
+\item $A_{\rm den}(n)\mid A_{\rm num}(n)$ for every $n$.
+\item If $r>0$ and $k\in\{1,2,3\}$, then
+\[
+ D(k,r,n)A_{\rm den}(n)\mid L(r)^r A_{\rm num}(n).
+\]
+\item If $r>0$, then $L(r)^r>0$.
+\item Defining $a(n)=A_{\rm num}(n)/A_{\rm den}(n)$ after the exact divisibility in (1), if $r>0$ and $k\in\{1,2,3\}$, then
+\[
+ D(k,r,n)\mid L(r)^r a(n).
+\]
+\end{enumerate}
+
+\section*{Background}
+The formal proof compares prime valuations using Legendre's formula.  Its pointwise floor estimate is proved by symbolic quotient--remainder interval analysis, including the boundary $q=8r$; prime powers below $8r$ are supplied by the stated least common multiple.
+
+\end{document}

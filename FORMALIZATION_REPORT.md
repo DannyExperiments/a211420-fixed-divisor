@@ -85,6 +85,42 @@ mathlib. No project axiom was introduced.
 7. Exact quotient recovery and positive cancellation give the quotient
    theorem.
 
+## Independent Aristotle implementation
+
+Aristotle (Harmonic) independently returned a second complete Lean source
+after the primary Codex formalization was finished:
+
+- Dashboard request:
+  `9c4e3070-8022-48f4-9c6f-1c1113b7b668`
+- Aristotle run:
+  `f56f7c36-ccd3-42d3-8016-ceb9a570da6f`
+- Exact downloaded archive SHA-256:
+  `77f332335d74a233ed1f231e8ca26f303d7adcc39f73d5edea0d83b7e9875d38`
+- Original pins: Lean 4.28.0 and mathlib v4.28.0.
+- Original `Main.lean` SHA-256:
+  `e89ef8dd6b3cec62dfabdcb0bc45c674679875c9e0ca6e5495281c90e7f60313`
+
+The unchanged 278-line `independent/aristotle/Main.lean` also compiles with
+this repository's Lean 4.30.0 and mathlib v4.30.0 environment. Its fully
+qualified result names are:
+
+```lean
+A211420.integral_cross
+A211420.strengthened_cross
+A211420.constant_pos
+A211420.strengthened
+```
+
+It uses a direct factorial-interval divisibility route with a
+`floor_step_bound` lemma, rather than the primary source's finite
+prime-power double-count architecture. The exact upstream archive, source,
+TeX result, summary, README, and project pins are preserved under
+`independent/aristotle/`.
+
+This is a second machine-generated formalization and a useful independent
+reproduction check. It is not a dependency of `A211420.lean`, human peer
+review, or evidence of historical priority.
+
 ## Mathlib API choices and refactorings
 
 - The handoff's range-based lcm scaffold was replaced by the extensionally
@@ -108,9 +144,10 @@ Primary clean command:
 ./scripts/verify.sh
 ```
 
-Final status: exit `0`. It runs `lake build` and rejects the forbidden proof
-tokens/declarations in project `*.lean` files while excluding `.lake/` and
-`.git/`.
+Final status: exit `0`. It runs `lake build`, compiles the unchanged
+Aristotle implementation with `lake env lean independent/aristotle/Main.lean`,
+and rejects the forbidden proof tokens/declarations in project `*.lean`
+files while excluding `.lake/` and `.git/`.
 
 GitHub Actions additionally runs the official `leanprover/lean-action@v1`
 with `leanchecker: true`. On Lean 4.30 this invokes the bundled `leanchecker`
@@ -131,10 +168,12 @@ temporary import-only audit file; that file was removed after the check.
 Final artifact SHA-256 digests:
 
 - `A211420.lean`: `96a2f752cd8f0331a6b5cf8d3a431df4a00f5e905b212691e408028f5937b186`
-- `scripts/verify.sh`: `61158423f2e685dcbff86a3846aebce0be3ebd1c07d6468f58a63008fbd608df`
+- `scripts/verify.sh`: `997615188273c55395199e5161f031fa653605895c570315a49b7dd8dfef349e`
 - `lake-manifest.json`: `768165e9bf27433856a5be4dbbf46e3037c0da71001979aa0fdc6aa269ac6fe7`
 - `paper/a211420_formalized.tex`: `859efe84ee5c55655941ae432754224b1bc88fa2ea7cafbb93e290364e825f1c`
 - `paper/a211420_formalized.pdf`: `1e028e7893dd0f044eb294843067a39c1e3adf6a2b88883a6b76ea3d631a1b1c`
+- `independent/aristotle/Main.lean`: `e89ef8dd6b3cec62dfabdcb0bc45c674679875c9e0ca6e5495281c90e7f60313`
+- Aristotle source archive: `77f332335d74a233ed1f231e8ca26f303d7adcc39f73d5edea0d83b7e9875d38`
 
 See `COMMAND_LOG.md` for the chronological shell-command and exit-status
 ledger, including failed intermediate builds.
@@ -148,6 +187,10 @@ ledger, including failed intermediate builds.
 - `scripts/verify.sh` — build and source-integrity gate.
 - `paper/a211420_formalized.tex` — verified note.
 - `paper/a211420_formalized.pdf` — five-page readable proof artifact.
+- `independent/aristotle/` — independently generated second Lean proof and
+  exact upstream project archive.
+- `audits/fresh_pro_audit_3.txt` and `fresh_pro_audit_4.txt` — two later
+  GPT-5.6 Pro shared-page audit transcripts.
 - `FORMALIZATION_REPORT.md` — this report.
 - `COMMAND_LOG.md` — command ledger.
 - `.gitignore` — build and TeX artifacts.

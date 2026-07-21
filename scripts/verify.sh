@@ -10,6 +10,14 @@ fi
 
 "$LAKE" build
 
+# Aristotle's independently generated source is deliberately not part of the
+# primary Lake library target. Compile it unchanged in the same pinned
+# Lean/mathlib environment as a second verification target.
+if [ -f independent/aristotle/Main.lean ]
+then
+  "$LAKE" env lean independent/aristotle/Main.lean
+fi
+
 if grep -R -nE '(^|[^[:alnum:]_])(sorry|admit|unsafe)([^[:alnum:]_]|$)|^[[:space:]]*(axiom|constant)([^[:alnum:]_]|$)' \
   --include='*.lean' \
   --exclude-dir='.lake' \
@@ -20,4 +28,4 @@ then
   exit 1
 fi
 
-echo 'Lean build and source-integrity checks passed.'
+echo 'Primary and independent Lean builds and source-integrity checks passed.'

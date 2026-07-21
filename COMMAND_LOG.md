@@ -1,8 +1,9 @@
 # Command ledger
 
-This ledger records shell commands run during the formalization. Browser
-submission to Aristotle and file edits through the patch interface are not
-shell commands; Aristotle's output was not used as a proof dependency.
+This ledger records shell commands run during the formalization and subsequent
+independent-reproduction packaging. Browser actions and file edits through the
+patch interface are identified separately. Aristotle's output was not used as
+a proof dependency of the primary formalization.
 
 ## Handoff and environment discovery
 
@@ -123,3 +124,24 @@ commands. PDF workflow run `29839378058` succeeded. Lean workflow run
 reported `invalid digit found in string` while parsing the Lean 4.30 export;
 this compatibility result is recorded in `FORMALIZATION_REPORT.md`. Their
 commit and workflow identifiers are also preserved in the repository history.
+
+## Independent Aristotle result and later audits
+
+| Command/action | Exit/status |
+|---|---:|
+| Aristotle dashboard inspection and project download in Chrome | completed; request status `Completed` |
+| `shasum -a 256 /Users/danielcabezas/Downloads/9c4e3070-8022-48f4-9c6f-1c1113b7b668-aristotle.tar.gz` | 0; `77f332...75d38` |
+| `tar -tzf ...` archive inventory | 0; eight project files plus root directory |
+| safe extraction into a new `/private/tmp/a211420-aristotle.*` directory | 0 |
+| forbidden-token scan of extracted `RequestProject/Main.lean` | 1 from `rg` meaning no matches |
+| SHA-256 inventory of extracted Aristotle files | 0 |
+| copy unchanged Aristotle `Main.lean` to `/private/tmp/AristotleA211420.lean` and compile with `lake env lean` | 0; warnings only under Lean/mathlib 4.30.0 |
+| capture two public ChatGPT shared-page audit transcripts in the in-app browser | completed; 25,696 and 27,180 visible-text characters |
+| import exact Aristotle upstream files and downloaded archive under `independent/aristotle/` | 0 |
+| compile the repository copy with `lake env lean independent/aristotle/Main.lean` | 0; warnings only |
+| `git diff --check; sh -n scripts/verify.sh; git status --short; ./scripts/verify.sh` after integration | 0; 2,721-job primary build, independent compile, and source-integrity gate passed |
+
+The two later Pro transcripts report exact searches over 120,006,000 and
+60,003,000 triples respectively. Those numbers are preserved as transcript
+claims, not as locally replayed computations. The locally reproducible
+checkers and logs remain under `checks/`.
