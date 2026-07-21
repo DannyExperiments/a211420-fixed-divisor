@@ -10,9 +10,9 @@ fi
 
 "$LAKE" build
 
-# Aristotle's independently generated source is deliberately not part of the
-# primary Lake library target. Compile it unchanged in the same pinned
-# Lean/mathlib environment as a second verification target.
+# Aristotle's separate second source is deliberately not part of the primary
+# Lake library target. Compile it unchanged in the same pinned Lean/mathlib
+# environment as a second verification target.
 if [ -f independent/aristotle/Main.lean ]
 then
   "$LAKE" env lean independent/aristotle/Main.lean
@@ -28,4 +28,4 @@ then
   exit 1
 fi
 
-echo 'Primary and independent Lean builds and source-integrity checks passed.'
+echo 'Primary and separate-second-source Lean builds and integrity checks passed.'

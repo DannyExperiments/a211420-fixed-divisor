@@ -1,7 +1,8 @@
-# Independent Aristotle formalization
+# Separate Aristotle formalization
 
-Aristotle (Harmonic) independently generated this second formalization after
-the primary Codex proof in the repository had already been completed.
+Aristotle (Harmonic) generated this separate second machine formalization,
+which was received after the primary Codex proof in the repository had already
+been completed.
 
 - Dashboard request:
   <https://aristotle.harmonic.fun/dashboard/requests/9c4e3070-8022-48f4-9c6f-1c1113b7b668>
@@ -25,6 +26,11 @@ The exact theorem names in this implementation are:
 The source uses a direct factorial-interval divisibility route, including a
 `floor_step_bound` lemma. This is structurally different from the primary
 `A211420.lean` development.
+
+The dashboard displays only the truncated task title “Formalize and
+kernel-check the following exact ...”. The exact input prompt could not be
+recovered, so the repository does not claim that this source was independently
+generated or constitutes an independent reproduction. See `PROVENANCE.md`.
 
 ## Verify
 
@@ -52,6 +58,6 @@ It also scans both implementations for forbidden proof escapes.
   `lake-manifest.original.json` — exact original project pins.
 - `source/*.tar.gz` — exact downloaded project archive.
 
-These files provide independent machine-reproduction evidence. They are not
-human peer review, a priority determination, or a dependency of the primary
-formalization.
+These files preserve a second machine-generated implementation and permit a
+separate compile check. They are not human peer review, a priority
+determination, or a dependency of the already completed primary formalization.

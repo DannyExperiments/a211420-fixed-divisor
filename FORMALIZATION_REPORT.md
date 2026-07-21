@@ -85,10 +85,10 @@ mathlib. No project axiom was introduced.
 7. Exact quotient recovery and positive cancellation give the quotient
    theorem.
 
-## Independent Aristotle implementation
+## Separate Aristotle implementation
 
-Aristotle (Harmonic) independently returned a second complete Lean source
-after the primary Codex formalization was finished:
+Aristotle (Harmonic) returned a separate second complete Lean source after the
+primary Codex formalization was finished:
 
 - Dashboard request:
   `9c4e3070-8022-48f4-9c6f-1c1113b7b668`
@@ -117,9 +117,13 @@ prime-power double-count architecture. The exact upstream archive, source,
 TeX result, summary, README, and project pins are preserved under
 `independent/aristotle/`.
 
-This is a second machine-generated formalization and a useful independent
-reproduction check. It is not a dependency of `A211420.lean`, human peer
-review, or evidence of historical priority.
+The exact Aristotle input prompt could not be recovered: the dashboard shows
+only the truncated title “Formalize and kernel-check the following exact ...”.
+The repository therefore does not claim independent generation or independent
+reproduction. This is a second machine-generated formalization and a separate
+compile check. It is not a dependency of the already completed
+`A211420.lean`, human peer review, or evidence of historical priority. See
+`independent/aristotle/PROVENANCE.md`.
 
 ## Mathlib API choices and refactorings
 
@@ -154,10 +158,10 @@ with `leanchecker: true`. On Lean 4.30 this invokes the bundled `leanchecker`
 to replay the compiled module through the Lean kernel, guarding against an
 invalid environment assembled by metaprogramming.
 
-After integrating the independent Aristotle source, Lean workflow run
+After integrating the separate Aristotle source, Lean workflow run
 `29845929949` succeeded in 5m 24s at commit
 `dd70f2e1c7a02dda1dfbba7a7ca8cd13c91ec9d7`. It completed the primary
-build, bundled-kernel replay, independent-source compile, and forbidden-source
+build, bundled-kernel replay, second-source compile, and forbidden-source
 gate.
 
 An external `nanoda` check was also attempted with `nanoda-allow-sorry:
@@ -174,9 +178,9 @@ temporary import-only audit file; that file was removed after the check.
 Final artifact SHA-256 digests:
 
 - `A211420.lean`: `96a2f752cd8f0331a6b5cf8d3a431df4a00f5e905b212691e408028f5937b186`
-- `scripts/verify.sh`: `997615188273c55395199e5161f031fa653605895c570315a49b7dd8dfef349e`
+- `scripts/verify.sh`: `5436609f463658ac1ec6352ea1c98ab151f14eb77af78667491ea52f5396182a`
 - `lake-manifest.json`: `768165e9bf27433856a5be4dbbf46e3037c0da71001979aa0fdc6aa269ac6fe7`
-- `paper/a211420_formalized.tex`: `859efe84ee5c55655941ae432754224b1bc88fa2ea7cafbb93e290364e825f1c`
+- `paper/a211420_formalized.tex`: `8f02a7eda9c8af6d07628292eb505b919c1a6038aeedc60cf0410343c5052328`
 - `paper/a211420_formalized.pdf`: `1e028e7893dd0f044eb294843067a39c1e3adf6a2b88883a6b76ea3d631a1b1c`
 - `independent/aristotle/Main.lean`: `e89ef8dd6b3cec62dfabdcb0bc45c674679875c9e0ca6e5495281c90e7f60313`
 - Aristotle source archive: `77f332335d74a233ed1f231e8ca26f303d7adcc39f73d5edea0d83b7e9875d38`
@@ -193,8 +197,8 @@ ledger, including failed intermediate builds.
 - `scripts/verify.sh` — build and source-integrity gate.
 - `paper/a211420_formalized.tex` — verified note.
 - `paper/a211420_formalized.pdf` — five-page readable proof artifact.
-- `independent/aristotle/` — independently generated second Lean proof and
-  exact upstream project archive.
+- `independent/aristotle/` — separate second machine-generated Lean proof,
+  `PROVENANCE.md`, and exact upstream project archive.
 - `audits/fresh_pro_audit_3.txt` and `fresh_pro_audit_4.txt` — two later
   GPT-5.6 Pro shared-page audit transcripts.
 - `FORMALIZATION_REPORT.md` — this report.

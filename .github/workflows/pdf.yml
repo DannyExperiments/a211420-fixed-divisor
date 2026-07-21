@@ -27,3 +27,9 @@ jobs:
           root_file: paper/a211420_formalized.tex
           texlive_version: 2026
           os: debian
+      - name: Upload compiled proof PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: a211420-formalized-pdf
+          path: paper/a211420_formalized.pdf
+          if-no-files-found: error
