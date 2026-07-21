@@ -27,6 +27,7 @@ jobs:
         uses: xu-cheng/latex-action@v4
         with:
           root_file: paper/a211420_formalized.tex
+          work_in_root_file_dir: true
           texlive_version: 2026
           os: debian
       - name: Upload compiled proof PDF
