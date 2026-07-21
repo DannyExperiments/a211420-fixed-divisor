@@ -1,0 +1,47 @@
+name: Presentation assets
+
+on:
+  push:
+    branches: [main, add-verified-abstract-social-card]
+    paths:
+      - "paper/**"
+      - "social/**"
+      - "scripts/build_presentation_assets.sh"
+      - ".github/workflows/presentation.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "paper/**"
+      - "social/**"
+      - "scripts/build_presentation_assets.sh"
+      - ".github/workflows/presentation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install TeX and Poppler
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            latexmk \
+            poppler-utils \
+            texlive-fonts-recommended \
+            texlive-latex-base \
+            texlive-latex-recommended
+      - name: Build and verify presentation assets
+        run: ./scripts/build_presentation_assets.sh
+      - name: Upload presentation artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: a211420-presentation-assets
+          path: |
+            paper/a211420_formalized.pdf
+            social/a211420_announcement.pdf
+            social/a211420_announcement_1600x900.png
+          if-no-files-found: error

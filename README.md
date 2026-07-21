@@ -70,6 +70,13 @@ the theorem here.
 - [Readable solution PDF](paper/a211420_formalized.pdf)
 - [Lean formalization](A211420.lean)
 
+## Announcement graphic
+
+[![A211420 theorem announcement](social/a211420_announcement_1600x900.png)](social/a211420_announcement_1600x900.png)
+
+The [announcement graphic](social/a211420_announcement_1600x900.png)
+summarizes only the theorem formalized in [`A211420.lean`](A211420.lean).
+
 ## Verify locally
 
 The project pins Lean 4.30.0 and mathlib v4.30.0.
