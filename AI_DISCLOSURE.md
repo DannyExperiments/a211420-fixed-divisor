@@ -14,7 +14,7 @@ available provenance permits.
   exact source archive and original Lean 4.28.0 project metadata are preserved
   under `independent/aristotle/`; its unchanged `Main.lean` also compiles
   under this repository's Lean/mathlib 4.30.0 environment.
-- **Danny Cabezas:** initiated the work, selected the problem and validation
+- **Danny:** initiated the work, selected the problem and validation
   requirements, curated the artifacts, and published the repository.
 
 The Lean build establishes that the stated formal declarations are accepted
