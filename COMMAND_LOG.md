@@ -152,3 +152,20 @@ The integration was committed through the authenticated GitHub connector as
 replay and the repository verifier's separate Aristotle compile. A
 publication-approval prompt was added only after that successful result was
 observed.
+
+## Publication-hygiene repair
+
+| Command/action | Exit/status |
+|---|---:|
+| `pdfinfo paper/a211420_formalized.pdf` before repair | 0; producer was ReportLab, so the committed file was not accepted as the TeX build |
+| primary-source checks of the Sun and Yang special cases | completed; theorem statements and substitutions matched the audit |
+| Aristotle dashboard provenance inspection | completed; only a truncated task title was recoverable, so independence wording was removed |
+| publication-path scan for workstation and internal Codex paths | 0; all identified paths were sanitized |
+| PDF workflow run `29849133287` after adding artifact upload | success, but artifact inspection showed the old ReportLab PDF byte-for-byte |
+| artifact ZIP SHA-256 check | 0; `91ac5f72078dbbdf2830a1e8f4e07e4338e73e4339a602d8e9630c6152e40858`, matching GitHub's artifact digest |
+| extracted artifact PDF SHA-256 check | 0; `1e028e...a1b1c`, proving the workflow had uploaded the stale committed PDF |
+
+The PDF workflow was therefore repaired again to remove the exact committed
+`paper/a211420_formalized.pdf` inside the ephemeral runner before invoking
+LaTeX. No TeX artifact is accepted for publication until its producer metadata
+and rendered pages are checked.

@@ -21,6 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Remove the pre-existing committed PDF
+        run: rm -f paper/a211420_formalized.pdf
       - name: Compile the proof paper
         uses: xu-cheng/latex-action@v4
         with:
