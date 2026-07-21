@@ -194,10 +194,10 @@ $L_r^r>0$.
 \section{Formal verification and provenance}
 
 The primary Lean development first proves the division-free theorem
-\texttt{A211420.strengthened\_cross}. Exact factorial-ratio divisibility is
-established by \texttt{A211420.integral\_cross} before the natural-number
+\nolinkurl{A211420.strengthened_cross}. Exact factorial-ratio divisibility is
+established by \nolinkurl{A211420.integral_cross} before the natural-number
 quotient is introduced, and the quotient identity is then used to derive the
-final theorem \texttt{A211420.strengthened}. The repository pins both Lean and
+final theorem \nolinkurl{A211420.strengthened}. The repository pins both Lean and
 mathlib. Running \texttt{./scripts/verify.sh} rebuilds the development and
 rejects forbidden proof escapes in project Lean files; Lean's kernel checks
 the formal proof.
