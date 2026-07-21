@@ -153,6 +153,16 @@ Aristotle implementation with `lake env lean independent/aristotle/Main.lean`,
 and rejects the forbidden proof tokens/declarations in project `*.lean`
 files while excluding `.lake/` and `.git/`.
 
+After all publication repairs and installation of the TeX-built PDF, the
+same command again exited `0`: all 2,721 primary build jobs completed, the
+separate Aristotle source compiled with warnings only, and the forbidden-
+source gate passed. `shasum -a 256 -c CHECKSUMS.sha256` also exited `0`.
+A repository-wide hygiene scan found no workstation paths, Codex-internal
+paths, private-key headers, GitHub-token prefixes, or OpenAI-key prefixes.
+The preserved Aristotle archive was listed before extraction, contained only
+eight regular relative-path files, and its extracted `Main.lean` had no
+forbidden proof tokens or credential/path patterns.
+
 GitHub Actions additionally runs the official `leanprover/lean-action@v1`
 with `leanchecker: true`. On Lean 4.30 this invokes the bundled `leanchecker`
 to replay the compiled module through the Lean kernel, guarding against an
@@ -163,6 +173,15 @@ After integrating the separate Aristotle source, Lean workflow run
 `dd70f2e1c7a02dda1dfbba7a7ca8cd13c91ec9d7`. It completed the primary
 build, bundled-kernel replay, second-source compile, and forbidden-source
 gate.
+
+The publication-repair PDF workflow run `29849862149` succeeded in 1m 44s
+at commit `c1e216eaf027b23fd770e14094156ca3fec5f3e8`. Artifact
+`8502918985` had ZIP SHA-256
+`5c5aa502351111c1d355b00cde6ef5b2c42d86db6aca8b675e9c7612f8de8c23`.
+The extracted PDF has SHA-256
+`90103b8ae0d0808192672bbbdb50e20dd2e0a2fa342c97f2a2bf7df3dbe2137e`,
+identifies `pdfTeX-1.40.29` as producer, and was committed unchanged after all
+four pages were rendered and visually inspected.
 
 An external `nanoda` check was also attempted with `nanoda-allow-sorry:
 false` in workflow run `29841907020`. The ordinary `lake build` succeeded
@@ -181,7 +200,7 @@ Final artifact SHA-256 digests:
 - `scripts/verify.sh`: `5436609f463658ac1ec6352ea1c98ab151f14eb77af78667491ea52f5396182a`
 - `lake-manifest.json`: `768165e9bf27433856a5be4dbbf46e3037c0da71001979aa0fdc6aa269ac6fe7`
 - `paper/a211420_formalized.tex`: `8f02a7eda9c8af6d07628292eb505b919c1a6038aeedc60cf0410343c5052328`
-- `paper/a211420_formalized.pdf`: `1e028e7893dd0f044eb294843067a39c1e3adf6a2b88883a6b76ea3d631a1b1c`
+- `paper/a211420_formalized.pdf`: `90103b8ae0d0808192672bbbdb50e20dd2e0a2fa342c97f2a2bf7df3dbe2137e`
 - `independent/aristotle/Main.lean`: `e89ef8dd6b3cec62dfabdcb0bc45c674679875c9e0ca6e5495281c90e7f60313`
 - Aristotle source archive: `77f332335d74a233ed1f231e8ca26f303d7adcc39f73d5edea0d83b7e9875d38`
 
@@ -196,7 +215,8 @@ ledger, including failed intermediate builds.
 - `lake-manifest.json` — resolved dependency commits.
 - `scripts/verify.sh` — build and source-integrity gate.
 - `paper/a211420_formalized.tex` — verified note.
-- `paper/a211420_formalized.pdf` — five-page readable proof artifact.
+- `paper/a211420_formalized.pdf` — four-page TeX-generated readable proof
+  artifact.
 - `independent/aristotle/` — separate second machine-generated Lean proof,
   `PROVENANCE.md`, and exact upstream project archive.
 - `audits/fresh_pro_audit_3.txt` and `fresh_pro_audit_4.txt` — two later
@@ -207,11 +227,13 @@ ledger, including failed intermediate builds.
 
 ## TeX/PDF status
 
-`paper/a211420_formalized.pdf` is present and was visually inspected page by
-page. No local TeX engine was available. The repository's GitHub Actions PDF
-workflow compiled `paper/a211420_formalized.tex` successfully with TeX Live
-2026 on Debian (workflow run `29839378058`, exit success), providing an
-independent check that the TeX source builds cleanly.
+`paper/a211420_formalized.pdf` is the artifact produced from the committed
+TeX by TeX Live 2026 on Debian in GitHub Actions run `29849862149`. Its
+producer is `pdfTeX-1.40.29`, its page count is four, and all four rendered
+pages were visually inspected for clipping, overlap, malformed formulae, and
+unresolved references before the file was committed. The workflow deletes
+the pre-existing committed PDF before compilation and uploads the newly built
+file, preventing a stale binary from passing as a successful TeX build.
 
 ## Remaining unformalized extensions
 

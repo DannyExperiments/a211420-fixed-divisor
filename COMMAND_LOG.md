@@ -164,8 +164,20 @@ observed.
 | PDF workflow run `29849133287` after adding artifact upload | success, but artifact inspection showed the old ReportLab PDF byte-for-byte |
 | artifact ZIP SHA-256 check | 0; `91ac5f72078dbbdf2830a1e8f4e07e4338e73e4339a602d8e9630c6152e40858`, matching GitHub's artifact digest |
 | extracted artifact PDF SHA-256 check | 0; `1e028e...a1b1c`, proving the workflow had uploaded the stale committed PDF |
+| forced-rebuild PDF workflow run `29849466573` | LaTeX compiled the revised source successfully to a four-page PDF, but artifact upload failed because `latexmk` wrote the output at the repository root |
+| corrected-directory PDF workflow run `29849862149` | 0; success in 1m 44s at commit `c1e216eaf027b23fd770e14094156ca3fec5f3e8` |
+| downloaded artifact `8502918985` and checked ZIP SHA-256 | 0; `5c5aa502351111c1d355b00cde6ef5b2c42d86db6aca8b675e9c7612f8de8c23`, matching GitHub's artifact digest |
+| extracted PDF SHA-256 and `pdfinfo` | 0; `90103b8ae0d0808192672bbbdb50e20dd2e0a2fa342c97f2a2bf7df3dbe2137e`, producer `pdfTeX-1.40.29`, four pages |
+| render all four PDF pages to PNG and inspect them | 0; no clipping, overlap, malformed formulae, or unresolved references observed |
+| `./scripts/verify.sh` after installing the TeX-built PDF and publication repairs | 0; 2,721-job primary build, separate Aristotle compile, and source-integrity gate passed |
+| `shasum -a 256 -c CHECKSUMS.sha256` | 0; every listed artifact matched |
+| publication-hygiene `rg` scan excluding `.git/`, `.lake/`, and temporary renders | 1 from `rg`, meaning no matches for workstation paths, Codex-internal paths, private-key headers, GitHub-token prefixes, or OpenAI-key prefixes |
+| `tar -tzf` and `tar -tvzf` on the preserved Aristotle archive | 0; eight regular files, no links, absolute paths, or parent-directory entries |
+| safe archive extraction to a new `$TMPDIR/a211420-aristotle-final.*` directory and content scan | 0; one prose statement saying the source contains no forbidden escapes; the targeted `Main.lean` scan returned 1 from `rg`, meaning no matches |
 
 The PDF workflow was therefore repaired again to remove the exact committed
 `paper/a211420_formalized.pdf` inside the ephemeral runner before invoking
-LaTeX. No TeX artifact is accepted for publication until its producer metadata
-and rendered pages are checked.
+LaTeX and to compile in the root file's directory. No TeX artifact is accepted
+for publication until its producer metadata and rendered pages are checked.
+The run `29849862149` satisfied those checks, and its extracted PDF replaced
+the earlier ReportLab file byte-for-byte.
